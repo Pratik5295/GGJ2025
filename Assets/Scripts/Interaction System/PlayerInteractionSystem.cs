@@ -17,7 +17,7 @@ namespace GGJ.Gameplay.System
 
         public bool HasInteractableObject => currentInteractableObject != null;
 
-        public void SetInteractableObject(BaseInteractable interactableObject)
+        public void DetectInteractableObject(BaseInteractable interactableObject)
         {
             currentInteractableObject = interactableObject;
         }

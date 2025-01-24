@@ -44,12 +44,12 @@ namespace GGJ.Gameplay.Player
 
         public void SetCollidedTrigger(BaseTriggerArea _triggerArea)
         {
-            interactionSystem.SetInteractableObject(_triggerArea.Interactable);
+            interactionSystem.DetectInteractableObject(_triggerArea.Interactable);
         }
 
         public void ResetCollidedTrigger()
         {
-            interactionSystem.SetInteractableObject(null);
+            interactionSystem.DetectInteractableObject(null);
         }
     }
 }
