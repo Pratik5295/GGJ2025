@@ -13,13 +13,44 @@ namespace GGJ.Gameplay.System
     public class PlayerInteractionSystem : MonoBehaviour
     {
         [SerializeField]
+        private BaseInteractable detectableObject;
+
+        //Held Object
+        [SerializeField]
         private BaseInteractable currentInteractableObject;
 
-        public bool HasInteractableObject => currentInteractableObject != null;
+        [SerializeField]
+        private Transform heldObjectTransform;
+
+        public bool HasDetectableObject => detectableObject != null;
 
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
-            currentInteractableObject = interactableObject;
+            detectableObject = interactableObject;
         }
+
+        public void HandlePlayerInteraction()
+        {
+            if (detectableObject == null) return;
+
+            if (currentInteractableObject != null)
+            {
+                //Already carrying an object, drop it
+                currentInteractableObject.GetComponent<BasePickable>().Drop();
+                currentInteractableObject = null;
+
+            }
+            else
+            {
+                //Pick item
+                if(detectableObject.TryGetComponent<BasePickable>(out var pickable))
+                {
+                    currentInteractableObject = pickable;
+                    pickable.Pick();
+                }
+            }
+        }
+
+        
     }
 }

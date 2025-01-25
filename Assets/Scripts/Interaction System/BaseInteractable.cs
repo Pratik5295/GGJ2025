@@ -1,6 +1,7 @@
+using GGJ.Gameplay.Interfaces;
 using UnityEngine;
 
-namespace GGJ.Gameplay.Interfaces
+namespace GGJ.Gameplay
 {
     /// <summary>
     /// Base class for interactable object implementing Interactable interface
