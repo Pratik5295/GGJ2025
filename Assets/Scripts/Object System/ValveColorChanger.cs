@@ -34,7 +34,7 @@ namespace GGJ.Gameplay
             if (gameValve != null)
             {
                 gameValve.OnStateChangeEvent += OnGameValveStateChangeHandler;
-                OnGameValveStateChangeHandler(gameValve.State);
+                OnGameValveStateChangeHandler(gameValve,gameValve.State);
             }
         }
 
@@ -46,9 +46,9 @@ namespace GGJ.Gameplay
             }
         }
 
-        private void OnGameValveStateChangeHandler(ValveState valve)
+        private void OnGameValveStateChangeHandler(GameValve valve,ValveState valveState)
         {
-            switch (valve)
+            switch (valveState)
             {
                 case ValveState.WORKING:
                     SetMat(workingMat); 

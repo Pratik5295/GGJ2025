@@ -13,7 +13,7 @@ namespace GGJ.Gameplay
 
         public bool IsRepairing => state == ValveState.REPAIR;
 
-        public Action<ValveState> OnStateChangeEvent;
+        public Action<GameValve,ValveState> OnStateChangeEvent;
 
         [SerializeField]
         private bool isBroken;
@@ -65,7 +65,15 @@ namespace GGJ.Gameplay
                 isBroken = true;
             }
 
-            OnStateChangeEvent?.Invoke(state);
+            OnStateChangeEvent?.Invoke(this,state);
+        }
+
+        /// <summary>
+        /// Force the valve to break
+        /// </summary>
+        public void BreakValve()
+        {
+            SetState(ValveState.BROKEN);
         }
 
         private void OnPlayerInteraction()
