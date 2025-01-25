@@ -357,6 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionSystem: {fileID: 9112513255953461713}
   collisionSystem: {fileID: 1413026205607304427}
+  input: {fileID: 6680554479440184319}
 --- !u!114 &9112513255953461713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +500,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  interact: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1

@@ -46,11 +46,37 @@ namespace GGJ.Gameplay.Player
         [SerializeField]
         private StarterAssetsInputs input;
 
+        private void OnInteractEventHandle(bool _interacted)
+        {
+            if(_interacted)
+            {
+                Debug.Log("Player pressed interact");
+                input.interact = false;
+            }
+        }
+
 
         #endregion
 
 
         #region UNITY METHODS
+
+        private void Start()
+        {
+            if(input != null)
+            {
+                input.OnInteractEvent += OnInteractEventHandle;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (input != null)
+            {
+                input.OnInteractEvent -= OnInteractEventHandle;
+            }
+        }
+
         #endregion
 
         public void SetCollidedTrigger(BaseTriggerArea _triggerArea)
