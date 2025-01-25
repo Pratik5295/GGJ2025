@@ -55,6 +55,7 @@ namespace GGJ.Gameplay.Player
             }
             else
             {
+                //Button let go
                 interactionSystem.ResetInteraction();
             }
         }

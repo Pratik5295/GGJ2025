@@ -27,7 +27,15 @@ namespace GGJ.Gameplay
         [SerializeField]
         private float breakAfter;
 
-        public bool IsBroken => state == StationState.BROKEN;
+        [SerializeField]
+        private float breakMax;
+
+        [Tooltip("Minimum after which the machine will definitely break")]
+        [SerializeField]
+        private float breakThreshold;
+
+
+        public bool IsBroken = false;
 
         [SerializeField]
         private int workingValves;
@@ -63,11 +71,14 @@ namespace GGJ.Gameplay
         {
             state = _state;
             OnStationStateChangeEvent?.Invoke(state);
+            IsBroken = true;
         }
 
         private void Start()
         {
             RegisterValves();
+
+            DetermineNextBreakAfter();
         }
 
         private void OnDestroy()
@@ -79,31 +90,48 @@ namespace GGJ.Gameplay
         {
             if (!IsBroken)
             {
+                IsBroken = true;
                 Invoke("BreakMachine", breakAfter);
+
+                //Determine the next break value
+                DetermineNextBreakAfter();
             }
+        }
+
+        private void DetermineNextBreakAfter()
+        {
+            breakAfter = UnityEngine.Random.Range(breakThreshold, breakMax);
         }
 
         private void BreakMachine()
         {
             //Randomly select a valve to break
+            int index = (int)UnityEngine.Random.Range(0,valveCount);
 
-            GameValve valveToBreak = machineValves.Single(valve => valve.State == ValveState.WORKING);
+            GameValve valveToBreak = machineValves[index];
 
             valveToBreak.BreakValve();
 
             SetState(StationState.BROKEN);
         }
 
-        public bool IsMachineBroken() => machineValves.Any(valve => valve.State == ValveState.BROKEN);
+
+        public bool AreAllValvesWorking() => machineValves.All(valve => valve.State == ValveState.WORKING);
 
 
         private void OnValveStateChangeHandler(GameValve _valve, ValveState _state)
         {
             Debug.Log($"{_valve.name} has new state {_state.ToString()}");
 
-            if(_state == ValveState.WORKING)
+            if(!AreAllValvesWorking())
             {
-                //The valve is working again
+                SetState(StationState.BROKEN);
+            }
+            else
+            {
+                //Machine is working 
+                SetState(StationState.WORKING);
+                IsBroken = false;
             }
         }
 

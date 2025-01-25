@@ -30,7 +30,11 @@ namespace GGJ.Gameplay.System
             if(currentInteractableObject != null)
             {
                 Debug.Log("Left area, fire force reset");
-                ResetInteraction();
+
+                if (!currentInteractableObject.GetComponent<BasePickable>())
+                {
+                    ResetInteraction();
+                }
 
             }
 
@@ -52,7 +56,7 @@ namespace GGJ.Gameplay.System
                     heldItemGO.transform.SetParent(null);
                 }
 
-                currentInteractableObject = null;
+               currentInteractableObject = null;
 
             }
             else
@@ -91,7 +95,7 @@ namespace GGJ.Gameplay.System
 
             if(currentInteractableObject == null) return;
 
-            if (!currentInteractableObject.GetComponent<BaseInteractable>()) return;
+            if (currentInteractableObject.GetComponent<BasePickable>()) return;
 
             //Player was holding an item
             currentInteractableObject.ResetInteract();

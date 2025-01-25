@@ -110,6 +110,8 @@ namespace GGJ.Gameplay
 
                 SetState(ValveState.WORKING);
 
+                repairSessionTime = 0f;
+
                 Debug.Log("Repair complete");
             }
         }
