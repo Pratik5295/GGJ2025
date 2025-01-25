@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectableObject: {fileID: 0}
   currentInteractableObject: {fileID: 0}
+  heldObjectTransform: {fileID: 6686043940010625369}
 --- !u!1 &5793838134667950956
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +694,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6686043940010625369}
   m_Layer: 0
-  m_Name: HeldObject
+  m_Name: ObjectHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using GGJ.Gameplay.System;
+using StarterAssets;
 using UnityEngine;
 
 namespace GGJ.Gameplay.Player
@@ -41,6 +42,16 @@ namespace GGJ.Gameplay.Player
 
         #endregion
 
+        #region Player Input Handling
+        [SerializeField]
+        private StarterAssetsInputs input;
+
+
+        #endregion
+
+
+        #region UNITY METHODS
+        #endregion
 
         public void SetCollidedTrigger(BaseTriggerArea _triggerArea)
         {
