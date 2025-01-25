@@ -12,7 +12,7 @@ namespace GGJ.Gameplay
         /// <summary>
         /// Allow player to interact with the object
         /// </summary>
-        public void Interact()
+        public virtual void Interact()
         {
            
         }

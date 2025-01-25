@@ -36,11 +36,14 @@ namespace GGJ.Gameplay.System
 
             if (currentInteractableObject != null)
             {
-                //Already carrying an object, drop it
-                currentInteractableObject.GetComponent<BasePickable>().Drop();
+                if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
+                {
+                    //Already carrying an object, drop it
+                    currentInteractableObject.GetComponent<BasePickable>().Drop();
 
-                var heldItemGO = currentInteractableObject.gameObject;
-                heldItemGO.transform.SetParent(null);
+                    var heldItemGO = currentInteractableObject.gameObject;
+                    heldItemGO.transform.SetParent(null);
+                }
 
                 currentInteractableObject = null;
 
@@ -62,6 +65,15 @@ namespace GGJ.Gameplay.System
                 else
                 {
                     Debug.LogWarning("This item cannot be picked, but only interacted with");
+
+                    //Check it is a valve
+                    if(detectableObject.TryGetComponent<BaseInteractable>(out var gameValve))
+                    {
+                        currentInteractableObject = gameValve;
+
+                        currentInteractableObject.Interact();
+                    }
+
                 }
             }
         }
