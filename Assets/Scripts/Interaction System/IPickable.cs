@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 namespace GGJ.Gameplay.Interfaces
 {
     /// <summary>
@@ -6,7 +8,7 @@ namespace GGJ.Gameplay.Interfaces
     /// </summary>
     public interface IPickable
     {
-        void Pick();
+        void Pick(Transform _parent,Vector3 _offset);
         void Drop();
     }
 }

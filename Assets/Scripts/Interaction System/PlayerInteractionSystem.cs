@@ -24,6 +24,14 @@ namespace GGJ.Gameplay.System
 
         public bool HasDetectableObject => detectableObject != null;
 
+        [SerializeField]
+        private Vector3 offset;
+
+        private void Start()
+        {
+            offset = heldObjectTransform.localPosition;
+        }
+
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
             detectableObject = interactableObject;
@@ -31,12 +39,16 @@ namespace GGJ.Gameplay.System
 
         public void HandlePlayerInteraction()
         {
-            if (detectableObject == null) return;
+            if (detectableObject == null && currentInteractableObject == null) return;
 
             if (currentInteractableObject != null)
             {
                 //Already carrying an object, drop it
                 currentInteractableObject.GetComponent<BasePickable>().Drop();
+
+                var heldItemGO = currentInteractableObject.gameObject;
+                heldItemGO.transform.SetParent(null);
+
                 currentInteractableObject = null;
 
             }
@@ -46,7 +58,17 @@ namespace GGJ.Gameplay.System
                 if(detectableObject.TryGetComponent<BasePickable>(out var pickable))
                 {
                     currentInteractableObject = pickable;
-                    pickable.Pick();
+
+                    var heldItemGO = currentInteractableObject.gameObject;
+                    heldItemGO.transform.SetParent(heldObjectTransform);
+
+
+                    //Notify item that it is picked
+                    pickable.Pick(transform, offset);
+                }
+                else
+                {
+                    Debug.LogWarning("This item cannot be picked, but only interacted with");
                 }
             }
         }
