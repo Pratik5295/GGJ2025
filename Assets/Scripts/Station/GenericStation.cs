@@ -1,9 +1,8 @@
 using System;
-using UnityEngine;
 using System.Collections.Generic;
-using static GGJ.MetaConstants.EnumManager;
 using System.Linq;
-using Unity.VisualScripting;
+using UnityEngine;
+using static GGJ.MetaConstants.EnumManager;
 
 namespace GGJ.Gameplay
 {
@@ -32,6 +31,9 @@ namespace GGJ.Gameplay
 
         [SerializeField]
         private int workingValves;
+
+        [SerializeField]
+        private Transform valvesHolder;
 
 
         private void RegisterValves()
@@ -75,7 +77,7 @@ namespace GGJ.Gameplay
 
         private void Update()
         {
-            if (IsBroken)
+            if (!IsBroken)
             {
                 Invoke("BreakMachine", breakAfter);
             }
@@ -88,12 +90,32 @@ namespace GGJ.Gameplay
             GameValve valveToBreak = machineValves.Single(valve => valve.State == ValveState.WORKING);
 
             valveToBreak.BreakValve();
+
+            SetState(StationState.BROKEN);
         }
+
+        public bool IsMachineBroken() => machineValves.Any(valve => valve.State == ValveState.BROKEN);
 
 
         private void OnValveStateChangeHandler(GameValve _valve, ValveState _state)
         {
             Debug.Log($"{_valve.name} has new state {_state.ToString()}");
+
+            if(_state == ValveState.WORKING)
+            {
+                //The valve is working again
+            }
+        }
+
+        [ContextMenu("Find All Valves")]
+        public void FindValves()
+        {
+            machineValves.Clear();
+            for (int i = 0; i < valvesHolder.childCount; i++)
+            {
+                var child = valvesHolder.GetChild(i);
+                machineValves.Add(child.GetComponent<GameValve>());
+            }
         }
     }
 }

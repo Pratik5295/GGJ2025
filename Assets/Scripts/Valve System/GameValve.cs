@@ -27,7 +27,7 @@ namespace GGJ.Gameplay
         private void Start()
         {
             //TO be removed 
-            SetState(ValveState.BROKEN);
+            //SetState(ValveState.BROKEN);
         }
 
         public override void Interact()
