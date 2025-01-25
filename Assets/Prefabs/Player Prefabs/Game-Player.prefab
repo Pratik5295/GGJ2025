@@ -357,6 +357,7 @@ MonoBehaviour:
   interactionSystem: {fileID: 9112513255953461713}
   collisionSystem: {fileID: 1413026205607304427}
   input: {fileID: 6680554479440184319}
+  CurrentOxygenStation: {fileID: 0}
 --- !u!114 &9112513255953461713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,6 +373,7 @@ MonoBehaviour:
   detectableObject: {fileID: 0}
   currentInteractableObject: {fileID: 0}
   heldObjectTransform: {fileID: 6686043940010625369}
+  playerCapsule: {fileID: 4972221838109682393}
 --- !u!1 &5793838134667950956
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ namespace GGJ.Gameplay
     public class GameValve : BaseInteractable
     {
         [SerializeField]
-        private ValveState state;
+        protected ValveState state;
 
         public ValveState State => state;
 
@@ -76,7 +76,7 @@ namespace GGJ.Gameplay
             SetState(ValveState.BROKEN);
         }
 
-        private void OnPlayerInteraction()
+        protected virtual void OnPlayerInteraction()
         {
             switch (state)
             {
