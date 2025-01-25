@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using GGJ.Gameplay.System;
+using StarterAssets;
 using UnityEngine;
 
 namespace GGJ.Gameplay.Player
@@ -41,6 +42,46 @@ namespace GGJ.Gameplay.Player
 
         #endregion
 
+        #region Player Input Handling
+        [SerializeField]
+        private StarterAssetsInputs input;
+
+        private void OnInteractEventHandle(bool _interacted)
+        {
+            if(_interacted)
+            {
+                //Player has initiated interaction, check the results
+                Debug.Log("Player pressed interact");
+                
+                interactionSystem.HandlePlayerInteraction();
+
+                input.interact = false;
+            }
+        }
+
+
+        #endregion
+
+
+        #region UNITY METHODS
+
+        private void Start()
+        {
+            if(input != null)
+            {
+                input.OnInteractEvent += OnInteractEventHandle;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (input != null)
+            {
+                input.OnInteractEvent -= OnInteractEventHandle;
+            }
+        }
+
+        #endregion
 
         public void SetCollidedTrigger(BaseTriggerArea _triggerArea)
         {

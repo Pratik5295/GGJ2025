@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 namespace GGJ.Gameplay.Interfaces
 {
     /// <summary>

@@ -15,18 +15,35 @@ namespace GGJ.Gameplay
     public class BasePickable : BaseInteractable,IPickable
     {
         [SerializeField]
+        private Collider colliderComponent;
+
+
+        [SerializeField]
         private PickState state;
 
         public PickState State => state;
 
+        private void Start()
+        {
+            colliderComponent = GetComponent<Collider>();
+        }
+
+        private void Update()
+        {
+        }
+
         public void Pick()
         {
             state = PickState.HELD;
+            colliderComponent.enabled = false;
         }
 
         public void Drop()
         {
             state = PickState.DROP;
+
+            colliderComponent.enabled = true;
+
         }
     }
 }
