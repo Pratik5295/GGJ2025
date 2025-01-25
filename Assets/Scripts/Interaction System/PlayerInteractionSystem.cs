@@ -28,6 +28,9 @@ namespace GGJ.Gameplay.System
 
         public bool HasDetectableObject => detectableObject != null;
 
+        [SerializeField]
+        private Transform playerCapsule;
+
 
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
@@ -76,7 +79,24 @@ namespace GGJ.Gameplay.System
                     else
                     {
                         //No oxygen station was found, just drop it#
-                        DropHeldItem();
+                        //DropHeldItem();
+
+                        if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
+                        {
+                            //Already carrying an object, drop it
+                            currentInteractableObject.GetComponent<BasePickable>().Drop();
+
+                            var heldItemGO = currentInteractableObject.gameObject;
+                            heldItemGO.transform.SetParent(null);
+
+                            heldItemGO.transform.localRotation = Quaternion.identity;
+                            heldItemGO.transform.localScale = Vector3.one;
+
+                            Vector3 throwForce = playerCapsule.forward * 10f;
+                            heldItem.GetComponent<Rigidbody>().AddForce(throwForce, ForceMode.Impulse);  
+                        }
+
+                        currentInteractableObject = null;
                     }
                 }
                 else
