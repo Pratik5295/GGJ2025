@@ -78,7 +78,10 @@ namespace StarterAssets
 		public void InteractInput(bool newInteractState)
 		{
 			interact = newInteractState;
-		}
+
+            OnInteractEvent?.Invoke(interact);	
+
+        }
 		
 		private void OnApplicationFocus(bool hasFocus)
 		{
