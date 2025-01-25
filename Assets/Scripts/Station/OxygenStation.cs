@@ -14,6 +14,8 @@ namespace GGJ.Gameplay {
 
         public bool HasCylinder => oxygenValve != null;
 
+        public OxygenValve GetOxygenTank => oxygenValve;
+
         public void SubmitOxygenValve(OxygenValve _valve)
         {
             oxygenValve = _valve;
@@ -24,15 +26,20 @@ namespace GGJ.Gameplay {
             go.localPosition = Vector3.zero;
             go.localRotation = Quaternion.identity;
             go.localScale = Vector3.one;
+
+            FillUpOxygenTank();
         }
 
         public void TakeValve()
         {
             if (oxygenValve == null) return;
-            var temp = oxygenValve;
-
 
             oxygenValve = null;
+        }
+
+        public void FillUpOxygenTank()
+        {
+
         }
 
 

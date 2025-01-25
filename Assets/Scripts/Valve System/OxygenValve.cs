@@ -9,21 +9,31 @@ namespace GGJ.Gameplay
     public class OxygenValve : BasePickable
     {
         [SerializeField]
-        protected ValveState valveState;
+        protected ValveState state;
 
-        public ValveState ValveState => valveState;
+        public ValveState TankState => state;
 
-        public bool IsRepairing => valveState == ValveState.REPAIR;
+        public bool IsRecharging => state == ValveState.REPAIR;
+
+        [Header("Oxygen Handling")]
+
+        [SerializeField]
+        private float OxygenAmount;
+
+        private float MaximumOxygenAmount = 100f;
+
+        [SerializeField]
+        private CarryType Type;
 
 
         [SerializeField]
         private bool isBroken;
 
         [SerializeField]
-        private float repairSessionTime = 0f;
+        private float rechargingTime = 0f;
 
         [SerializeField]
-        private float maxRepairTime;
+        private float timeTakenToRecharge;
 
 
         public override void Interact()
@@ -37,7 +47,7 @@ namespace GGJ.Gameplay
 
         private void OnPlayerInteraction()
         {
-            switch(valveState)
+            switch(state)
             {
                 case ValveState.BROKEN:
 
@@ -68,7 +78,7 @@ namespace GGJ.Gameplay
                 //Is or was broken and not fixed yet
 
                 //Reset repair time
-                repairSessionTime = 0f;
+                rechargingTime = 0f;
 
                 SetState(ValveState.BROKEN);
             }
@@ -78,9 +88,9 @@ namespace GGJ.Gameplay
 
         private void SetState(ValveState _state)
         {
-            valveState = _state;
+            state = _state;
 
-            if (valveState == ValveState.BROKEN)
+            if (state == ValveState.BROKEN)
             {
                 isBroken = true;
             }
@@ -88,23 +98,23 @@ namespace GGJ.Gameplay
         }
 
 
-        private void Repairing()
+        private void Recharging()
         {
-            repairSessionTime += Time.deltaTime;
+            rechargingTime += Time.deltaTime;
             //Debug.Log($"{name} is being repaired for {repairSessionTime}");
 
-            CheckForRepairComplete();
+            CheckForRechargeComplete();
         }
 
-        private void CheckForRepairComplete()
+        private void CheckForRechargeComplete()
         {
-            if (repairSessionTime > maxRepairTime)
+            if (rechargingTime > timeTakenToRecharge)
             {
                 isBroken = false;
 
                 SetState(ValveState.WORKING);
 
-                repairSessionTime = 0f;
+                rechargingTime = 0f;
 
                 Debug.Log("Repair complete");
             }
@@ -112,10 +122,10 @@ namespace GGJ.Gameplay
 
         private void Update()
         {
-            if (IsRepairing)
+            if (IsRecharging)
             {
                 //Currently being repaired
-                Repairing();
+                Recharging();
 
             }
         }

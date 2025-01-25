@@ -112,6 +112,16 @@ namespace GGJ.Gameplay.System
                 {
 
                     //Do separate check for oxygen tank
+                    if (PlayerManager.Instance.CurrentOxygenStation != null)
+                    {
+                        var oxyStation = PlayerManager.Instance.CurrentOxygenStation;
+                        if (oxyStation.HasCylinder)
+                        {
+                            //Picking up held oxygen tank
+
+                            oxyStation.TakeValve();
+                        }
+                    }
 
                     currentInteractableObject = pickable;
 
