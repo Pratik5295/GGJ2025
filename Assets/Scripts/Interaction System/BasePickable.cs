@@ -17,11 +17,6 @@ namespace GGJ.Gameplay
         [SerializeField]
         private Collider colliderComponent;
 
-        [SerializeField]
-        private Transform parent = null;
-
-        [SerializeField]
-        private Vector3 offset;
 
         [SerializeField]
         private PickState state;
@@ -35,29 +30,19 @@ namespace GGJ.Gameplay
 
         private void Update()
         {
-            if(state == PickState.HELD)
-            {
-                //transform.position = parent.position + offset;
-            }
         }
 
-        public void Pick(Transform _parent, Vector3 _offset)
+        public void Pick()
         {
             state = PickState.HELD;
-            // gameObject.SetActive(false);
             colliderComponent.enabled = false;
-
-            parent = _parent;
-            offset = _offset;
         }
 
         public void Drop()
         {
             state = PickState.DROP;
-            // gameObject.SetActive(true);
 
             colliderComponent.enabled = true;
-            parent = null;
 
         }
     }

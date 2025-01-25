@@ -8,7 +8,7 @@ namespace GGJ.Gameplay.Interfaces
     /// </summary>
     public interface IPickable
     {
-        void Pick(Transform _parent,Vector3 _offset);
+        void Pick();
         void Drop();
     }
 }

@@ -24,13 +24,6 @@ namespace GGJ.Gameplay.System
 
         public bool HasDetectableObject => detectableObject != null;
 
-        [SerializeField]
-        private Vector3 offset;
-
-        private void Start()
-        {
-            offset = heldObjectTransform.localPosition;
-        }
 
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
@@ -64,7 +57,7 @@ namespace GGJ.Gameplay.System
 
 
                     //Notify item that it is picked
-                    pickable.Pick(transform, offset);
+                    pickable.Pick();
                 }
                 else
                 {
