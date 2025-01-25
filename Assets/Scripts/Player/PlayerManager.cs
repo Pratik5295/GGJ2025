@@ -51,11 +51,12 @@ namespace GGJ.Gameplay.Player
             if(_interacted)
             {
                 //Player has initiated interaction, check the results
-                Debug.Log("Player pressed interact");
-                
                 interactionSystem.HandlePlayerInteraction();
-
-                input.interact = false;
+            }
+            else
+            {
+                //Button let go
+                interactionSystem.ResetInteraction();
             }
         }
 

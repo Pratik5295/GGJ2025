@@ -27,6 +27,17 @@ namespace GGJ.Gameplay.System
 
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
+            if(currentInteractableObject != null)
+            {
+                Debug.Log("Left area, fire force reset");
+
+                if (!currentInteractableObject.GetComponent<BasePickable>())
+                {
+                    ResetInteraction();
+                }
+
+            }
+
             detectableObject = interactableObject;
         }
 
@@ -36,13 +47,16 @@ namespace GGJ.Gameplay.System
 
             if (currentInteractableObject != null)
             {
-                //Already carrying an object, drop it
-                currentInteractableObject.GetComponent<BasePickable>().Drop();
+                if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
+                {
+                    //Already carrying an object, drop it
+                    currentInteractableObject.GetComponent<BasePickable>().Drop();
 
-                var heldItemGO = currentInteractableObject.gameObject;
-                heldItemGO.transform.SetParent(null);
+                    var heldItemGO = currentInteractableObject.gameObject;
+                    heldItemGO.transform.SetParent(null);
+                }
 
-                currentInteractableObject = null;
+               currentInteractableObject = null;
 
             }
             else
@@ -62,8 +76,32 @@ namespace GGJ.Gameplay.System
                 else
                 {
                     Debug.LogWarning("This item cannot be picked, but only interacted with");
+
+                    //Check it is a valve
+                    if(detectableObject.TryGetComponent<BaseInteractable>(out var gameValve))
+                    {
+                        currentInteractableObject = gameValve;
+
+                        currentInteractableObject.Interact();
+                    }
+
                 }
             }
+        }
+
+        public void ResetInteraction()
+        {
+            //Check if it was holding or interacting with an item
+
+            if(currentInteractableObject == null) return;
+
+            if (currentInteractableObject.GetComponent<BasePickable>()) return;
+
+            //Player was holding an item
+            currentInteractableObject.ResetInteract();
+
+            currentInteractableObject = null;
+
         }
 
         

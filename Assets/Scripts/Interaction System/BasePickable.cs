@@ -17,6 +17,9 @@ namespace GGJ.Gameplay
         [SerializeField]
         private Collider colliderComponent;
 
+        [SerializeField]
+        private Rigidbody rb;
+
 
         [SerializeField]
         private PickState state;
@@ -26,16 +29,14 @@ namespace GGJ.Gameplay
         private void Start()
         {
             colliderComponent = GetComponent<Collider>();
-        }
-
-        private void Update()
-        {
+            rb = GetComponent<Rigidbody>();
         }
 
         public void Pick()
         {
             state = PickState.HELD;
             colliderComponent.enabled = false;
+            rb.isKinematic = true;
         }
 
         public void Drop()
@@ -43,6 +44,8 @@ namespace GGJ.Gameplay
             state = PickState.DROP;
 
             colliderComponent.enabled = true;
+
+            rb.isKinematic = false;
 
         }
     }

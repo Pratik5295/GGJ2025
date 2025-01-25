@@ -6,5 +6,7 @@ namespace GGJ.Gameplay.Interfaces
     public interface IInteractable
     {
         void Interact();
+
+        void ResetInteract();
     }
 }
