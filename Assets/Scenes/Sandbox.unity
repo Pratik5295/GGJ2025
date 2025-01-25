@@ -544,6 +544,7 @@ GameObject:
   - component: {fileID: 853466274}
   - component: {fileID: 853466273}
   - component: {fileID: 853466277}
+  - component: {fileID: 853466278}
   m_Layer: 0
   m_Name: Base-Valve
   m_TagString: Untagged
@@ -653,6 +654,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  isBroken: 0
+  repairSessionTime: 0
+  maxRepairTime: 3
+--- !u!114 &853466278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853466271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8721ebbfe70064f8fe1d6c177f276e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  workingMat: {fileID: 2100000, guid: 116e1186d89a742448694147657a68b3, type: 2}
+  brokenMat: {fileID: 2100000, guid: 066700bd78403034c859d778a90f95df, type: 2}
+  repairMat: {fileID: 2100000, guid: e70ec2043b635664db30b17427e04575, type: 2}
+  meshRenderer: {fileID: 0}
+  gameValve: {fileID: 0}
 --- !u!1 &1490273211
 GameObject:
   m_ObjectHideFlags: 0

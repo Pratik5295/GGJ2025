@@ -27,6 +27,13 @@ namespace GGJ.Gameplay.System
 
         public void DetectInteractableObject(BaseInteractable interactableObject)
         {
+            if(currentInteractableObject != null)
+            {
+                Debug.Log("Left area, fire force reset");
+                ResetInteraction();
+
+            }
+
             detectableObject = interactableObject;
         }
 
@@ -76,6 +83,21 @@ namespace GGJ.Gameplay.System
 
                 }
             }
+        }
+
+        public void ResetInteraction()
+        {
+            //Check if it was holding or interacting with an item
+
+            if(currentInteractableObject == null) return;
+
+            if (!currentInteractableObject.GetComponent<BaseInteractable>()) return;
+
+            //Player was holding an item
+            currentInteractableObject.ResetInteract();
+
+            currentInteractableObject = null;
+
         }
 
         

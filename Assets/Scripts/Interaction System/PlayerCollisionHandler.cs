@@ -27,6 +27,7 @@ namespace GGJ.Gameplay.System
 
         private void OnTriggerExit(Collider other)
         {
+            Debug.Log("Left trigger area");
             //Check if we are in interactable trigger area
             if (other.gameObject.TryGetComponent<BaseTriggerArea>(out var triggerObj))
             {

@@ -7,7 +7,8 @@ namespace GGJ.MetaConstants
         public enum ValveState
         {
             WORKING = 0,
-            BROKEN = 1
+            BROKEN = 1,
+            REPAIR = 2     //Denotes the valve is being repaired currently
         }
     }
 }

@@ -16,5 +16,14 @@ namespace GGJ.Gameplay
         {
            
         }
+
+
+        /// <summary>
+        /// Reset the interact on this object
+        /// </summary>
+        public virtual void ResetInteract()
+        {
+
+        }
     }
 }
