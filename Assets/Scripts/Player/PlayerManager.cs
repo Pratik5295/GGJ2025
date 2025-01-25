@@ -55,7 +55,11 @@ namespace GGJ.Gameplay.Player
                 
                 interactionSystem.HandlePlayerInteraction();
 
-                input.interact = false;
+                //input.interact = false;
+            }
+            else
+            {
+                Debug.Log("Letting interact go");
             }
         }
 
