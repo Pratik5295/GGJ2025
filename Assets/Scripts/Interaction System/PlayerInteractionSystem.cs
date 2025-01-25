@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GGJ.Gameplay.System
 {
@@ -18,6 +19,8 @@ namespace GGJ.Gameplay.System
         //Held Object
         [SerializeField]
         private BaseInteractable currentInteractableObject;
+
+        public BaseInteractable CurrentInteractableObject => currentInteractableObject;
 
         [SerializeField]
         private Transform heldObjectTransform;
@@ -64,6 +67,9 @@ namespace GGJ.Gameplay.System
                 //Pick item
                 if(detectableObject.TryGetComponent<BasePickable>(out var pickable))
                 {
+
+                    //Do separate check for oxygen tank
+
                     currentInteractableObject = pickable;
 
                     var heldItemGO = currentInteractableObject.gameObject;
@@ -103,6 +109,18 @@ namespace GGJ.Gameplay.System
             currentInteractableObject = null;
 
         }
+
+        public void ForcePlayerPick(BasePickable _pick)
+        {
+            currentInteractableObject = _pick;
+
+            var heldItemGO = currentInteractableObject.gameObject;
+            heldItemGO.transform.SetParent(heldObjectTransform);
+
+
+            //Notify item that it is picked
+            _pick.Pick();
+        }    
 
         
     }

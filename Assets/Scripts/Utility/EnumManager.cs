@@ -8,7 +8,7 @@ namespace GGJ.MetaConstants
         {
             WORKING = 0,
             BROKEN = 1,
-            REPAIR = 2     //Denotes the valve is being repaired currently
+            REPAIR = 2     //Denotes Valve repair as well as Oxygen Valve refill
         }
 
 
@@ -17,5 +17,23 @@ namespace GGJ.MetaConstants
             WORKING = 0,
             BROKEN = 1  
         }
+
+        /// <summary>
+        /// Type of object the player is carrying
+        /// </summary>
+        public enum CarryType
+        {
+            DEFAULT = 0,
+            OXY_EMPTY = 1,
+            OXY_FULL = 2
+        }
+
+
+        public enum PickState
+        {
+            DROP = 0,
+            HELD = 1
+        }
+
     }
 }

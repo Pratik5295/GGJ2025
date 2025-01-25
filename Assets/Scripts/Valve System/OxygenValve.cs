@@ -1,19 +1,20 @@
+
 using System;
+using GGJ.Gameplay.Player;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
 
 namespace GGJ.Gameplay
 {
-    public class GameValve : BaseInteractable
+    public class OxygenValve : BasePickable
     {
         [SerializeField]
-        protected ValveState state;
+        protected ValveState valveState;
 
-        public ValveState State => state;
+        public ValveState ValveState => valveState;
 
-        public bool IsRepairing => state == ValveState.REPAIR;
+        public bool IsRepairing => valveState == ValveState.REPAIR;
 
-        public Action<GameValve,ValveState> OnStateChangeEvent;
 
         [SerializeField]
         private bool isBroken;
@@ -24,11 +25,6 @@ namespace GGJ.Gameplay
         [SerializeField]
         private float maxRepairTime;
 
-        private void Start()
-        {
-            //TO be removed 
-            //SetState(ValveState.BROKEN);
-        }
 
         public override void Interact()
         {
@@ -38,6 +34,28 @@ namespace GGJ.Gameplay
 
             OnPlayerInteraction();
         }
+
+        private void OnPlayerInteraction()
+        {
+            switch(valveState)
+            {
+                case ValveState.BROKEN:
+
+                    //Check with interaction system if player is carrying oxygen tank
+                    var playerHeldItem = PlayerManager.Instance.GetCurrentItem();
+
+                    if (playerHeldItem != null)
+                    {
+
+                    }
+                    else
+                    {
+                        Debug.LogWarning("You need to have oxygen tanks");
+                    }
+                    break;
+            }
+        }
+
 
         public override void ResetInteract()
         {
@@ -56,43 +74,19 @@ namespace GGJ.Gameplay
             }
         }
 
+
+
         private void SetState(ValveState _state)
         {
-            state = _state;
+            valveState = _state;
 
-            if (state == ValveState.BROKEN)
+            if (valveState == ValveState.BROKEN)
             {
                 isBroken = true;
             }
 
-            OnStateChangeEvent?.Invoke(this,state);
         }
 
-        /// <summary>
-        /// Force the valve to break
-        /// </summary>
-        public void BreakValve()
-        {
-            SetState(ValveState.BROKEN);
-        }
-
-        protected virtual void OnPlayerInteraction()
-        {
-            switch (state)
-            {
-                case ValveState.BROKEN:
-
-                    SetState(ValveState.REPAIR);
-                    Debug.Log($"{gameObject.name} is being repaired");
-
-                    break;
-
-                case ValveState.WORKING:
-                    Debug.Log("Object is repaired. No interaction needed");
-                    //Maybe force the valve to reveal its health?
-                    break;
-            }
-        }
 
         private void Repairing()
         {
@@ -104,7 +98,7 @@ namespace GGJ.Gameplay
 
         private void CheckForRepairComplete()
         {
-            if(repairSessionTime > maxRepairTime)
+            if (repairSessionTime > maxRepairTime)
             {
                 isBroken = false;
 
@@ -125,5 +119,6 @@ namespace GGJ.Gameplay
 
             }
         }
+
     }
 }

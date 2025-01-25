@@ -17,7 +17,15 @@ namespace GGJ.Gameplay.System
             //Check if we are in interactable trigger area
             if(other.gameObject.TryGetComponent<BaseTriggerArea>(out var triggerObj))
             {
-                PlayerManager.Instance.SetCollidedTrigger(triggerObj);
+                if (triggerObj.TryGetComponent<OxygenStation>(out var oxygenStation))
+                {
+                    PlayerManager.Instance.CurrentOxygenStation = oxygenStation;
+                }
+                else
+                {
+
+                    PlayerManager.Instance.SetCollidedTrigger(triggerObj);
+                }
             }
             else
             {
@@ -31,6 +39,11 @@ namespace GGJ.Gameplay.System
             //Check if we are in interactable trigger area
             if (other.gameObject.TryGetComponent<BaseTriggerArea>(out var triggerObj))
             {
+                if (triggerObj.TryGetComponent<OxygenStation>(out var oxygenStation))
+                {
+                    PlayerManager.Instance.CurrentOxygenStation = null;
+                }
+
                 PlayerManager.Instance.ResetCollidedTrigger();
             }
         }

@@ -1,14 +1,9 @@
 using UnityEngine;
 using GGJ.Gameplay.Interfaces;
+using static GGJ.MetaConstants.EnumManager;
 
 namespace GGJ.Gameplay
 {
-    public enum PickState
-    {
-        DROP = 0,
-        HELD = 1
-    }
-
     /// <summary>
     /// Base pickable extends base interactable and pickable
     /// </summary>
@@ -25,6 +20,9 @@ namespace GGJ.Gameplay
         private PickState state;
 
         public PickState State => state;
+
+        [SerializeField]
+        protected CarryType carryType;
 
         private void Start()
         {
