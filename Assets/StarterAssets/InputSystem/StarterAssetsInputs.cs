@@ -14,6 +14,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public bool next;	//Button use for UI interactions
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -23,6 +24,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 		public Action<bool> OnInteractEvent;
+		public Action<bool> OnNextEvent;
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
@@ -51,6 +53,11 @@ namespace StarterAssets
 		public void OnInteract(InputValue value)
 		{
 			InteractInput(value.isPressed);
+		}
+
+		public void OnNext(InputValue value)
+		{
+			NextInput(value.isPressed);
 		}
 #endif
 
@@ -82,8 +89,16 @@ namespace StarterAssets
             OnInteractEvent?.Invoke(interact);	
 
         }
-		
-		private void OnApplicationFocus(bool hasFocus)
+
+		public void NextInput(bool newNextState)
+		{
+			next = newNextState;
+            OnNextEvent?.Invoke(next);
+
+        }
+
+
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}
