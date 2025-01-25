@@ -11,6 +11,14 @@ namespace GGJ.MetaConstants
             REPAIR = 2     //Denotes Valve repair as well as Oxygen Valve refill
         }
 
+        public enum OxyState
+        {
+            INUSE = 0,
+            EMPTY = 1,
+            RECHARE = 2,
+            FULL = 3     //Denotes Valve repair as well as Oxygen Valve refill
+        }
+
 
         public enum StationState
         {

@@ -7,16 +7,16 @@ namespace GGJ.Gameplay {
     public class OxygenStation : BaseTriggerArea
     {
         [SerializeField]
-        private OxygenValve oxygenValve;
+        protected OxygenValve oxygenValve;
 
         [SerializeField]
-        private Transform valveStoreLoc;
+        protected Transform valveStoreLoc;
 
         public bool HasCylinder => oxygenValve != null;
 
         public OxygenValve GetOxygenTank => oxygenValve;
 
-        public void SubmitOxygenValve(OxygenValve _valve)
+        public virtual void SubmitOxygenValve(OxygenValve _valve)
         {
             oxygenValve = _valve;
 
@@ -39,7 +39,7 @@ namespace GGJ.Gameplay {
 
         public void FillUpOxygenTank()
         {
-
+            oxygenValve.StartRecharging();
         }
 
 

@@ -9,11 +9,13 @@ namespace GGJ.Gameplay
     public class OxygenValve : BasePickable
     {
         [SerializeField]
-        protected ValveState state;
+        protected OxyState state;
 
-        public ValveState TankState => state;
+        public OxyState TankState => state;
 
-        public bool IsRecharging => state == ValveState.REPAIR;
+        public bool IsRecharging => state == OxyState.RECHARE;
+
+        public bool IsInUse => state == OxyState.INUSE;
 
         [Header("Oxygen Handling")]
 
@@ -25,9 +27,16 @@ namespace GGJ.Gameplay
         [SerializeField]
         private CarryType Type;
 
+        public CarryType CurrentType => Type;
+
 
         [SerializeField]
         private bool isBroken;
+
+        [SerializeField]
+        private float timeToEmpty;
+
+        private float maxTime;
 
         [SerializeField]
         private float rechargingTime = 0f;
@@ -49,7 +58,7 @@ namespace GGJ.Gameplay
         {
             switch(state)
             {
-                case ValveState.BROKEN:
+                case OxyState.EMPTY:
 
                     //Check with interaction system if player is carrying oxygen tank
                     var playerHeldItem = PlayerManager.Instance.GetCurrentItem();
@@ -80,20 +89,16 @@ namespace GGJ.Gameplay
                 //Reset repair time
                 rechargingTime = 0f;
 
-                SetState(ValveState.BROKEN);
+                SetState(OxyState.EMPTY);
             }
         }
 
 
 
-        private void SetState(ValveState _state)
+        private void SetState(OxyState _state)
         {
             state = _state;
 
-            if (state == ValveState.BROKEN)
-            {
-                isBroken = true;
-            }
 
         }
 
@@ -101,7 +106,6 @@ namespace GGJ.Gameplay
         private void Recharging()
         {
             rechargingTime += Time.deltaTime;
-            //Debug.Log($"{name} is being repaired for {repairSessionTime}");
 
             CheckForRechargeComplete();
         }
@@ -112,21 +116,64 @@ namespace GGJ.Gameplay
             {
                 isBroken = false;
 
-                SetState(ValveState.WORKING);
+                SetState(OxyState.FULL);
 
                 rechargingTime = 0f;
 
-                Debug.Log("Repair complete");
+                OxygenAmount = MaximumOxygenAmount;
+
+                Type = CarryType.OXY_FULL;
+
+                Debug.Log("Tank recharge complete");
             }
+        }
+
+        private void Start()
+        {
+            maxTime = timeToEmpty;
         }
 
         private void Update()
         {
             if (IsRecharging)
             {
-                //Currently being repaired
+                //Currently being recharged
                 Recharging();
+            }
+            else if (IsInUse)
+            {
+                UsingOxygen();
+            }
+        }
 
+        public void StartRecharging()
+        {
+            SetState(OxyState.RECHARE);
+        }
+
+        public void StartToUse()
+        {
+            SetState(OxyState.INUSE);
+        }
+        private void UsingOxygen()
+        {
+            timeToEmpty += Time.deltaTime;
+
+            CheckForCylinderEmpty();
+        }
+
+        private void CheckForCylinderEmpty()
+        {
+            if(timeToEmpty > maxTime)
+            {
+                //Tank empty
+                SetState(OxyState.EMPTY);
+                rechargingTime = 0f;
+                timeToEmpty = 0f;
+
+                Type = CarryType.OXY_EMPTY;
+
+                Debug.Log("Tank empty");
             }
         }
 

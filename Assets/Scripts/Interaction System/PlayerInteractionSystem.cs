@@ -59,10 +59,11 @@ namespace GGJ.Gameplay.System
                     //Submit the cylinder to station
                     if(PlayerManager.Instance.CurrentOxygenStation != null)
                     {
+                        var heldCylinder = GetHeldOxygenCylinder();
                         if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
                         {
 
-                            PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(GetHeldOxygenCylinder());
+                            PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
                             //Place the item
                             currentInteractableObject.ResetInteract();
@@ -78,8 +79,7 @@ namespace GGJ.Gameplay.System
                     }
                     else
                     {
-                        //No oxygen station was found, just drop it#
-                        //DropHeldItem();
+                        //No oxygen station was found, Just drop it (Throw it)
 
                         if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
                         {
