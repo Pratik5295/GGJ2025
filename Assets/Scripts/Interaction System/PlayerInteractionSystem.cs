@@ -1,4 +1,5 @@
 using GGJ.Gameplay.Interfaces;
+using GGJ.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -50,16 +51,38 @@ namespace GGJ.Gameplay.System
 
             if (currentInteractableObject != null)
             {
-                if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
+                if (IsHoldingOxygenCylinder())
                 {
-                    //Already carrying an object, drop it
-                    currentInteractableObject.GetComponent<BasePickable>().Drop();
+                    //Submit the cylinder to station
+                    if(PlayerManager.Instance.CurrentOxygenStation != null)
+                    {
+                        if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
+                        {
 
-                    var heldItemGO = currentInteractableObject.gameObject;
-                    heldItemGO.transform.SetParent(null);
+                            PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(GetHeldOxygenCylinder());
+
+                            //Place the item
+                            currentInteractableObject.ResetInteract();
+
+                            currentInteractableObject = null;
+                        }
+                        else
+                        {
+                            //Already has a cylinder, just return
+
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        //No oxygen station was found, just drop it#
+                        DropHeldItem();
+                    }
                 }
-
-               currentInteractableObject = null;
+                else
+                {
+                    DropHeldItem();
+                }
 
             }
             else
@@ -74,6 +97,10 @@ namespace GGJ.Gameplay.System
 
                     var heldItemGO = currentInteractableObject.gameObject;
                     heldItemGO.transform.SetParent(heldObjectTransform);
+
+                    heldItemGO.transform.localPosition = Vector3.zero;
+                    heldItemGO.transform.localRotation = Quaternion.identity;
+                    heldItemGO.transform.localScale = Vector3.one;
 
 
                     //Notify item that it is picked
@@ -121,6 +148,36 @@ namespace GGJ.Gameplay.System
             //Notify item that it is picked
             _pick.Pick();
         }    
+
+        private bool IsHoldingOxygenCylinder()
+        {
+            return currentInteractableObject.TryGetComponent<OxygenValve>(out var heldItem);
+            
+        }
+
+        private OxygenValve GetHeldOxygenCylinder()
+        {
+            currentInteractableObject.TryGetComponent<OxygenValve>(out var heldItem);
+
+            return heldItem;
+        }
+
+        private void DropHeldItem()
+        {
+            if (currentInteractableObject.TryGetComponent<BasePickable>(out var heldItem))
+            {
+                //Already carrying an object, drop it
+                currentInteractableObject.GetComponent<BasePickable>().Drop();
+
+                var heldItemGO = currentInteractableObject.gameObject;
+                heldItemGO.transform.SetParent(null);
+
+                heldItemGO.transform.localRotation = Quaternion.identity;
+                heldItemGO.transform.localScale = Vector3.one;
+            }
+
+            currentInteractableObject = null;
+        }
 
         
     }
