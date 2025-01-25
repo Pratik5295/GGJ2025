@@ -32,8 +32,7 @@ namespace GGJ.MetaConstants
         public enum CarryType
         {
             DEFAULT = 0,
-            OXY_EMPTY = 1,
-            OXY_FULL = 2
+            OXYGEN = 1
         }
 
 

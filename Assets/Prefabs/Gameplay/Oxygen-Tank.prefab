@@ -126,12 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderComponent: {fileID: 0}
   rb: {fileID: 0}
+  pickState: 0
+  carryType: 1
   state: 0
-  carryType: 2
-  valveState: 0
-  isBroken: 0
-  repairSessionTime: 0
-  maxRepairTime: 0
+  OxygenAmount: 0
+  Type: 1
+  timeToEmpty: 0
+  maxTime: 10
+  rechargingTime: 0
+  timeTakenToRecharge: 5
 --- !u!23 &2822381963879513599
 MeshRenderer:
   m_ObjectHideFlags: 0

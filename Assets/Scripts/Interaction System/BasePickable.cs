@@ -17,12 +17,12 @@ namespace GGJ.Gameplay
 
 
         [SerializeField]
-        private PickState state;
+        private PickState pickState;
 
-        public PickState State => state;
+        public PickState PickState => pickState;
 
         [SerializeField]
-        protected CarryType carryType;
+        protected CarryType Type;
 
         private void Start()
         {
@@ -32,14 +32,14 @@ namespace GGJ.Gameplay
 
         public void Pick()
         {
-            state = PickState.HELD;
+            pickState = PickState.HELD;
             colliderComponent.enabled = false;
             rb.isKinematic = true;
         }
 
         public void Drop()
         {
-            state = PickState.DROP;
+            pickState = PickState.DROP;
 
             colliderComponent.enabled = true;
 

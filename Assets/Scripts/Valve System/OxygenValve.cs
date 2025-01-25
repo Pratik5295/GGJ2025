@@ -25,17 +25,9 @@ namespace GGJ.Gameplay
         private float MaximumOxygenAmount = 100f;
 
         [SerializeField]
-        private CarryType Type;
-
-        public CarryType CurrentType => Type;
-
-
-        [SerializeField]
-        private bool isBroken;
-
-        [SerializeField]
         private float timeToEmpty;
 
+        [SerializeField]
         private float maxTime;
 
         [SerializeField]
@@ -82,15 +74,8 @@ namespace GGJ.Gameplay
 
             Debug.Log("Restting valve if not fixed");
 
-            if (isBroken)
-            {
-                //Is or was broken and not fixed yet
+            rechargingTime = 0f;
 
-                //Reset repair time
-                rechargingTime = 0f;
-
-                SetState(OxyState.EMPTY);
-            }
         }
 
 
@@ -114,23 +99,18 @@ namespace GGJ.Gameplay
         {
             if (rechargingTime > timeTakenToRecharge)
             {
-                isBroken = false;
-
                 SetState(OxyState.FULL);
 
                 rechargingTime = 0f;
 
                 OxygenAmount = MaximumOxygenAmount;
-
-                Type = CarryType.OXY_FULL;
-
                 Debug.Log("Tank recharge complete");
             }
         }
 
         private void Start()
         {
-            maxTime = timeToEmpty;
+            timeToEmpty = 0f;
         }
 
         private void Update()
@@ -170,8 +150,6 @@ namespace GGJ.Gameplay
                 SetState(OxyState.EMPTY);
                 rechargingTime = 0f;
                 timeToEmpty = 0f;
-
-                Type = CarryType.OXY_EMPTY;
 
                 Debug.Log("Tank empty");
             }
