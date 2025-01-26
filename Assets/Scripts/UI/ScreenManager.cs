@@ -149,6 +149,11 @@ public class ScreenManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void RestartGame()
+    {
+        GameManager.Instance.RestartGame();
+    }
+
     public void ShowSettings()
     {
         ShowScreen(ScreenKey.SETTINGS);
