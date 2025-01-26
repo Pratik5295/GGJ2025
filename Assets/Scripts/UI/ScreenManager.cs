@@ -7,7 +7,7 @@ public class ScreenManager : MonoBehaviour
 
     public enum ScreenKey
     {
-       DEFAULT = 0,
+       MENU = 0,     //Will be turned to menu
        GAME = 1,
        PAUSE = 2,
        INFO = 3
@@ -21,10 +21,17 @@ public class ScreenManager : MonoBehaviour
     }
 
     [SerializeField] private List<ScreenEntry> screens = new List<ScreenEntry>();
-    [SerializeField] private ScreenKey initialScreenKey = ScreenKey.DEFAULT;
+    [SerializeField] private ScreenKey initialScreenKey = ScreenKey.MENU;
 
+    [SerializeField]
     private GameObject _activeScreen;
-    private ScreenKey _activeScreenKey = ScreenKey.DEFAULT;
+
+    [SerializeField]
+    private ScreenKey _activeScreenKey = ScreenKey.MENU;
+
+    public ScreenKey ActiveKey => _activeScreenKey;
+
+    public GameObject ActiveScreen => _activeScreen;
 
     private void Awake()
     {
@@ -40,10 +47,7 @@ public class ScreenManager : MonoBehaviour
 
     private void Start()
     {
-        if (initialScreenKey != ScreenKey.DEFAULT)
-        {
-            ShowScreen(initialScreenKey);
-        }
+        ShowScreen(initialScreenKey);
     }
 
     /// <summary>
@@ -52,7 +56,7 @@ public class ScreenManager : MonoBehaviour
     /// <param name="key">The key of the screen to display.</param>
     public void ShowScreen(ScreenKey key)
     {
-        if (key == ScreenKey.DEFAULT)
+        if (key == ScreenKey.MENU)
         {
             Debug.LogWarning("ShowScreen was called with a None key.");
             return;
@@ -93,7 +97,7 @@ public class ScreenManager : MonoBehaviour
         {
             _activeScreen.SetActive(false);
             _activeScreen = null;
-            _activeScreenKey = ScreenKey.DEFAULT;
+            _activeScreenKey = ScreenKey.MENU;
         }
     }
 
@@ -112,5 +116,25 @@ public class ScreenManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void StartGame()
+    {
+        ShowScreen(ScreenKey.GAME);
+    }
+
+    public void PauseGame()
+    {
+        ShowScreen(ScreenKey.PAUSE);
+    }
+
+    public void ResumeGame()
+    {
+        ShowScreen(ScreenKey.GAME);
+    }
+
+    public void ShowInfo()
+    {
+        ShowScreen(ScreenKey.INFO);
     }
 }

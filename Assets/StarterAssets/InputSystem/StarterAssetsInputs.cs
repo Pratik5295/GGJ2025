@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -100,7 +101,8 @@ namespace StarterAssets
 
         private void OnApplicationFocus(bool hasFocus)
 		{
-			SetCursorState(cursorLocked);
+			if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+				SetCursorState(cursorLocked);
 		}
 
 		private void SetCursorState(bool newState)

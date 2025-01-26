@@ -112,14 +112,20 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
+			if (ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+			{
+				JumpAndGravity();
+				GroundedCheck();
+				Move();
+			}
 		}
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if (ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+			{
+				CameraRotation();
+			}
 		}
 
 		private void GroundedCheck()
