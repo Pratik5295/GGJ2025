@@ -25,6 +25,10 @@ namespace GGJ.Gameplay
         [SerializeField]
         private float maxRepairTime;
 
+        public Animator handleAnim;
+
+        public Animator lightAnim;
+
         private void Start()
         {
             //TO be removed 

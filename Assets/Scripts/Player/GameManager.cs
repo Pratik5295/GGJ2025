@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
         //Add the end state cinematic and scene restart here
         AudioManager.Instance.PlayForegroundSound(3);
-        Invoke("RestartGame",2f);
+        Invoke("RestartGame",17f);
 
 
     }
