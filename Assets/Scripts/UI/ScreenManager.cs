@@ -11,7 +11,9 @@ public class ScreenManager : MonoBehaviour
        MENU = 0,     //Will be turned to menu
        GAME = 1,
        PAUSE = 2,
-       INFO = 3
+       INFO = 3,
+       SETTINGS = 4,
+       CREDITS = 5
     }
 
     [System.Serializable]
@@ -150,6 +152,21 @@ public class ScreenManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ShowSettings()
+    {
+        ShowScreen(ScreenKey.SETTINGS);
+    }
+
+    public void ShowCredits()
+    {
+        ShowScreen(ScreenKey.CREDITS);
+    }
+
+    public void ShowMenu()
+    {
+        ShowScreen(ScreenKey.MENU);
     }
 
     public void ShowInstructionText()
