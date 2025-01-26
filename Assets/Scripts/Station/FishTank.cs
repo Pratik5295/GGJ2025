@@ -19,7 +19,11 @@ public class FishTank : MonoBehaviour
 
     [SerializeField]
     private Transform valvesHolder;
+    [SerializeField]
+    private float timerCounter = 0f;
 
+    [SerializeField]
+    private float maxBreakTimeAllowed;
 
     public bool AreAllValvesFull() => machineValves.All(valve => valve.OxygenStationState != OxyStatonState.NEEDOXY);
 
@@ -37,6 +41,8 @@ public class FishTank : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null || GameManager.Instance.IsGameOver) return;
+
         if (ScreenManager.Instance.ActiveKey != ScreenManager.ScreenKey.GAME) return;
 
         if (!AreAllValvesFull())
@@ -46,7 +52,34 @@ public class FishTank : MonoBehaviour
         else
         {
             IsBroken = false;
+            ResetLoseConditionCounter();
         }
+
+        if (IsBroken)
+        {
+            CheckIfBroken();
+        }
+    }
+
+
+    /// <summary>
+    /// The lose condition determiner will start if broken is set ot true
+    /// </summary>
+    private void CheckIfBroken()
+    {
+        timerCounter += Time.deltaTime;
+
+        if (timerCounter > maxBreakTimeAllowed)
+        {
+            Debug.Log("Game over!");
+
+            GameManager.Instance.SetGameOver();
+        }
+    }
+
+    private void ResetLoseConditionCounter()
+    {
+        timerCounter = 0f;
     }
 
 

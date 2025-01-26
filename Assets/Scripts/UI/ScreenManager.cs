@@ -51,7 +51,7 @@ public class ScreenManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Optional, if you want the manager to persist between scenes
+      
     }
 
     private void Start()

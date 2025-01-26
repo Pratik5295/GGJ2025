@@ -125,8 +125,9 @@ MonoBehaviour:
   machineValves:
   - {fileID: 5317447812279446233}
   IsBroken: 0
-  workingValves: 0
   valvesHolder: {fileID: 0}
+  timerCounter: 0
+  maxBreakTimeAllowed: 30
 --- !u!1 &3293291472199954831
 GameObject:
   m_ObjectHideFlags: 0

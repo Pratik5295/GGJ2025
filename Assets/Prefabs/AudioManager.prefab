@@ -311,10 +311,7 @@ MonoBehaviour:
   - {fileID: 6507919473417722071}
   - {fileID: 8633449139818483167}
   backgroundMusic: {fileID: 0}
-  foregroundClips:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  foregroundClips: []
   backgroundVolume: 0.5
   foregroundVolume: 0.8
 --- !u!1 &6469334186332847448

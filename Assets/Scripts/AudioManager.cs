@@ -8,11 +8,11 @@ namespace GGJ.Managers
 
         // References to audio sources
         public AudioSource backgroundAudioSource;
-        public AudioSource[] foregroundAudioSources = new AudioSource[3];
+        public AudioSource[] foregroundAudioSources = new AudioSource[20];
 
         // Audio clips for background and foreground sounds
         public AudioClip backgroundMusic;
-        public AudioClip[] foregroundClips = new AudioClip[3];
+        public AudioClip[] foregroundClips = new AudioClip[20];
 
         // Volume control for each audio source
         [Range(0f, 1f)] public float backgroundVolume = 0.5f;
