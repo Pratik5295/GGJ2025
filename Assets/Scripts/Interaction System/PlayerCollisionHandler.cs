@@ -47,20 +47,11 @@ namespace GGJ.Gameplay.System
                 {
                     PlayerManager.Instance.CurrentOxygenStation = oxygenStation;
                 }
-                else
-                {
-
-                    PlayerManager.Instance.SetCollidedTrigger(triggerObj);
-                }
 
                 if (PlayerManager.Instance.InteractionSystem.CurrentInteractableObject == null)
                 {
                     ScreenManager.Instance.ShowInstructionText();
                 }
-            }
-            else
-            {
-                Debug.LogWarning("Trigger area is unhandled");
             }
         }
 
