@@ -75,7 +75,7 @@ namespace StarterAssets
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			//jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)
