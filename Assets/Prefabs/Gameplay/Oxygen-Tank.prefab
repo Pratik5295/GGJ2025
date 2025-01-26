@@ -169,7 +169,7 @@ MonoBehaviour:
   rb: {fileID: 5657998003500138374}
   pickState: 0
   Type: 1
-  state: 0
+  state: 3
   OxygenAmount: 0
   timeCounter: 0
   timeToEmpty: 20
