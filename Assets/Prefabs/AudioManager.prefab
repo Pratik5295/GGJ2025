@@ -310,10 +310,16 @@ MonoBehaviour:
   - {fileID: 4915223730242548496}
   - {fileID: 6507919473417722071}
   - {fileID: 8633449139818483167}
-  backgroundMusic: {fileID: 0}
-  foregroundClips: []
+  backgroundMusic: {fileID: 8300000, guid: adb27009a6f5cb5469c083a61d31ae1e, type: 3}
+  foregroundClips:
+  - {fileID: 8300000, guid: 3e93c9d996ea45b4896aab5548dde0e6, type: 3}
+  - {fileID: 8300000, guid: 56daa3926b80d804fbdd7a7db7c3ec8c, type: 3}
+  - {fileID: 8300000, guid: 826dddc1bb882ec4e871ab8931717a11, type: 3}
+  - {fileID: 8300000, guid: 0a55e3fb87402ef49847433b215f4248, type: 3}
+  - {fileID: 8300000, guid: 577584cab6221874c8346a355f61edd5, type: 3}
+  - {fileID: 8300000, guid: f962c772b18b42d47831dee911611486, type: 3}
   backgroundVolume: 0.5
-  foregroundVolume: 0.8
+  foregroundVolume: 0.78
 --- !u!1 &6469334186332847448
 GameObject:
   m_ObjectHideFlags: 0

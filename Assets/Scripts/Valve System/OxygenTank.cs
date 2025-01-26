@@ -37,6 +37,14 @@ namespace GGJ.Gameplay
         private float timeTakenToRecharge;
 
 
+        [SerializeField]
+        private float timeMax;
+
+        [Tooltip("Minimum after which the machine will definitely break")]
+        [SerializeField]
+        private float emptyTimeThreshold;
+
+
         public override void Interact()
         {
             base.Interact();
@@ -105,6 +113,8 @@ namespace GGJ.Gameplay
 
                 OxygenAmount = MaximumOxygenAmount;
                 Debug.Log("Tank recharge complete");
+
+                DetermineNextBreakAfter();
             }
         }
 
@@ -155,6 +165,11 @@ namespace GGJ.Gameplay
 
                 Debug.Log("Tank empty");
             }
+        }
+
+        private void DetermineNextBreakAfter()
+        {
+            timeToEmpty = UnityEngine.Random.Range(emptyTimeThreshold, timeMax);
         }
 
     }

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessageOnInteract: 
+  index: 0
   colliderComponent: {fileID: 7060715676342291570}
   rb: {fileID: 5657998003500138374}
   pickState: 0
@@ -171,9 +172,11 @@ MonoBehaviour:
   state: 0
   OxygenAmount: 0
   timeCounter: 0
-  timeToEmpty: 10
+  timeToEmpty: 20
   rechargingTime: 0
   timeTakenToRecharge: 3
+  timeMax: 20
+  emptyTimeThreshold: 8
 --- !u!1001 &5112729245165357247
 PrefabInstance:
   m_ObjectHideFlags: 0
