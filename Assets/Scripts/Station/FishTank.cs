@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FishTank : OxygenStation
 {
-    public override void SubmitOxygenValve(OxygenValve _valve)
+    public override void SubmitOxygenValve(OxygenTank _valve)
     {
         oxygenValve = _valve;
 

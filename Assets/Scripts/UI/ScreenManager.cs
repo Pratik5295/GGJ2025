@@ -168,6 +168,8 @@ public class ScreenManager : MonoBehaviour
     public void PopulateInfoText(string _text)
     {
         infoObject.PopulateInfoText(_text);
+
+        ShowInstructionText();
     }
 
     #endregion

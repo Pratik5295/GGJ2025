@@ -6,7 +6,7 @@ using static GGJ.MetaConstants.EnumManager;
 
 namespace GGJ.Gameplay
 {
-    public class OxygenValve : BasePickable
+    public class OxygenTank : BasePickable
     {
         [SerializeField]
         protected OxyState state;
@@ -25,10 +25,10 @@ namespace GGJ.Gameplay
         private float MaximumOxygenAmount = 100f;
 
         [SerializeField]
-        private float timeToEmpty;
+        private float timeCounter;
 
         [SerializeField]
-        private float maxTime;
+        private float timeToEmpty;
 
         [SerializeField]
         private float rechargingTime = 0f;
@@ -110,7 +110,7 @@ namespace GGJ.Gameplay
 
         private void Start()
         {
-            timeToEmpty = 0f;
+            timeCounter = 0f;
         }
 
         private void Update()
@@ -137,19 +137,19 @@ namespace GGJ.Gameplay
         }
         private void UsingOxygen()
         {
-            timeToEmpty += Time.deltaTime;
+            timeCounter += Time.deltaTime;
 
             CheckForCylinderEmpty();
         }
 
         private void CheckForCylinderEmpty()
         {
-            if(timeToEmpty > maxTime)
+            if(timeCounter > timeToEmpty)
             {
                 //Tank empty
                 SetState(OxyState.EMPTY);
                 rechargingTime = 0f;
-                timeToEmpty = 0f;
+                timeCounter = 0f;
 
                 Debug.Log("Tank empty");
             }

@@ -699,6 +699,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d4016400f42f4324bbb6787b2496d1da, type: 2}
+    - target: {fileID: 7770199314352913819, guid: 01575dd870e500043986d353f22e7a9d, type: 3}
+      propertyPath: maxTime
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7918201204782241872, guid: 01575dd870e500043986d353f22e7a9d, type: 3}
       propertyPath: m_Name
       value: Oxygen-Tank (1)
@@ -2556,6 +2560,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 775142915595516825, guid: 01575dd870e500043986d353f22e7a9d, type: 3}
+      propertyPath: timeToEmpty
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1125728947230111819, guid: 01575dd870e500043986d353f22e7a9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.22

@@ -181,13 +181,13 @@ namespace GGJ.Gameplay.System
 
         private bool IsHoldingOxygenCylinder()
         {
-            return currentInteractableObject.TryGetComponent<OxygenValve>(out var heldItem);
+            return currentInteractableObject.TryGetComponent<OxygenTank>(out var heldItem);
             
         }
 
-        private OxygenValve GetHeldOxygenCylinder()
+        private OxygenTank GetHeldOxygenCylinder()
         {
-            currentInteractableObject.TryGetComponent<OxygenValve>(out var heldItem);
+            currentInteractableObject.TryGetComponent<OxygenTank>(out var heldItem);
 
             return heldItem;
         }

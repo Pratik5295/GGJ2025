@@ -38,6 +38,32 @@ namespace GGJ.Gameplay.System
             }
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            //Check if we are in interactable trigger area
+            if (other.gameObject.TryGetComponent<BaseTriggerArea>(out var triggerObj))
+            {
+                if (triggerObj.TryGetComponent<OxygenStation>(out var oxygenStation))
+                {
+                    PlayerManager.Instance.CurrentOxygenStation = oxygenStation;
+                }
+                else
+                {
+
+                    PlayerManager.Instance.SetCollidedTrigger(triggerObj);
+                }
+
+                if (PlayerManager.Instance.InteractionSystem.CurrentInteractableObject == null)
+                {
+                    ScreenManager.Instance.ShowInstructionText();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Trigger area is unhandled");
+            }
+        }
+
         private void OnTriggerExit(Collider other)
         {
             //Check if we are in interactable trigger area
