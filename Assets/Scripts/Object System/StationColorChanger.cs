@@ -22,12 +22,12 @@ namespace GGJ.Gameplay
         private MeshRenderer meshRenderer;
 
         [SerializeField]
-        private GenericStation station;
+        private OxygenRefillingStation station;
 
         private void Start()
         {
             meshRenderer = GetComponent<MeshRenderer>();
-            station = GetComponent<GenericStation>();
+            station = GetComponent<OxygenRefillingStation>();
 
             if (station != null)
             {

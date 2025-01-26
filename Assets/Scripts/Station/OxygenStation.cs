@@ -16,6 +16,13 @@ namespace GGJ.Gameplay {
 
         public OxygenTank GetOxygenTank => oxygenValve;
 
+        [SerializeField]
+        private OxygenRefillingStation MainMachine;
+
+        public bool IsMainMachineWorking => MainMachine.State == MetaConstants.EnumManager.StationState.WORKING;
+
+        public bool CanSupplyOxygen = true;
+
         public virtual void SubmitOxygenValve(OxygenTank _valve)
         {
             oxygenValve = _valve;
@@ -42,6 +49,17 @@ namespace GGJ.Gameplay {
             oxygenValve.StartRecharging();
         }
 
+        private void Update()
+        {
+            if(MainMachine.State == MetaConstants.EnumManager.StationState.WORKING)
+            {
+                CanSupplyOxygen = true;
+            }
+            else
+            {
+                CanSupplyOxygen = false;
+            }
+        }
 
         //TO DO:
         /// Station shows UI, HUD wise that the oxygen cylinder has been picked

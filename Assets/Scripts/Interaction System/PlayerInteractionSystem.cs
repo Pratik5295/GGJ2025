@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using GGJ.Gameplay.Player;
+using GGJ.Toaster;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -62,13 +63,21 @@ namespace GGJ.Gameplay.System
                         var heldCylinder = GetHeldOxygenCylinder();
                         if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
                         {
+                            //Check if the main machine is broken
+                            if (!IsMachineBroken(PlayerManager.Instance.CurrentOxygenStation))
+                            {
+                                PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
-                            PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
+                                //Place the item
+                                currentInteractableObject.ResetInteract();
 
-                            //Place the item
-                            currentInteractableObject.ResetInteract();
-
-                            currentInteractableObject = null;
+                                currentInteractableObject = null;
+                            }
+                            else
+                            {
+                                Debug.Log("Machine is broken, cant add anything. Fix it");
+                                ToasterManager.Instance.PopulateToasterMessage("Supply machine is broken, unable to refill oxygen");
+                            }
                         }
                         else
                         {
@@ -207,6 +216,11 @@ namespace GGJ.Gameplay.System
             }
 
             currentInteractableObject = null;
+        }
+
+        private bool IsMachineBroken(OxygenStation _station)
+        {
+            return !_station.IsMainMachineWorking;
         }
 
         

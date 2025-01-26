@@ -73,6 +73,15 @@ namespace GGJ.Gameplay.Player
             }
         }
 
+        private void OnPauseEventHandler(bool _pause)
+        {
+            if (_pause)
+            {
+                ScreenManager.Instance.PauseGame();
+                input.pauseKey = false;
+            }
+        }
+
 
         #endregion
 
@@ -84,6 +93,8 @@ namespace GGJ.Gameplay.Player
             if(input != null)
             {
                 input.OnInteractEvent += OnInteractEventHandle;
+
+                input.OnPausedPressedEvent += OnPauseEventHandler;
             }
         }
 
@@ -92,6 +103,8 @@ namespace GGJ.Gameplay.Player
             if (input != null)
             {
                 input.OnInteractEvent -= OnInteractEventHandle;
+
+                input.OnPausedPressedEvent -= OnPauseEventHandler;
             }
         }
 
