@@ -18,6 +18,9 @@ namespace GGJ.Toaster
         [Header("UI References")]
         [SerializeField] private TextMeshProUGUI toasterText;
 
+        [SerializeField]
+        private float hideAfter;
+
 
         private void Awake()
         {
@@ -33,20 +36,24 @@ namespace GGJ.Toaster
 
         private void Start()
         {
+            Close();
         }
 
-        public void PopulateToasterMessage(GameObject _object)
+        public void PopulateToasterMessage(string message)
         {
-
+            toasterText.text = message;
+            Open();
         }
 
         public void Open()
         {
+            toasterDisplay.SetActive(true);
+            Invoke("Close",hideAfter);
         }
 
         public void Close()
         {
-            
+            toasterDisplay.SetActive(false);
         }
 
 

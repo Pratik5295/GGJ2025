@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using GGJ.Gameplay.Player;
+using GGJ.Toaster;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -75,6 +76,7 @@ namespace GGJ.Gameplay.System
                             else
                             {
                                 Debug.Log("Machine is broken, cant add anything. Fix it");
+                                ToasterManager.Instance.PopulateToasterMessage("Supply machine is broken, unable to refill oxygen");
                             }
                         }
                         else
