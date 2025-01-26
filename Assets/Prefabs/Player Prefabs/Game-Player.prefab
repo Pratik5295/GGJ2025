@@ -502,6 +502,8 @@ MonoBehaviour:
   jump: 0
   sprint: 0
   interact: 0
+  next: 0
+  pauseKey: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -712,7 +714,7 @@ Transform:
   m_GameObject: {fileID: 6318482275776374086}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.615, z: 0.47}
+  m_LocalPosition: {x: 0.5, y: -0.61, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
