@@ -12,11 +12,15 @@ namespace GGJ.Gameplay
         [SerializeField]
         private string MessageOnInteract;
 
+        public int index;
+
         /// <summary>
         /// Allow player to interact with the object
         /// </summary>
         public virtual void Interact()
         {
+            ScreenManager.Instance.SetInfoPage(index);
+
            ScreenManager.Instance.PopulateInfoText(MessageOnInteract);
            ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.INFO);    
         }

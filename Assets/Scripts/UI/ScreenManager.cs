@@ -44,6 +44,12 @@ public class ScreenManager : MonoBehaviour
     [SerializeField]
     private ScreenInfoText infoObject;
 
+    //0 for computer screen and 1 for datapad screen
+    public int infoScreen;
+
+    public GameObject computerUI;
+    public GameObject datapadUI;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -137,6 +143,22 @@ public class ScreenManager : MonoBehaviour
     public void ResumeGame()
     {
         ShowScreen(ScreenKey.GAME);
+    }
+
+    public void SetInfoPage(int index)
+    {
+        infoScreen = index;
+        
+        if(infoScreen == 0)
+        {
+            computerUI.SetActive(true);
+            datapadUI.SetActive(false);
+        }
+        else
+        {
+            computerUI.SetActive(false);
+            datapadUI.SetActive(true);
+        }
     }
 
     public void ShowInfo()

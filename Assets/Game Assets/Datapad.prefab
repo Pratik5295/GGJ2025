@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MessageOnInteract: Testing Interacting message info box
+  index: 1
 --- !u!1001 &1032982451964602
 PrefabInstance:
   m_ObjectHideFlags: 0
