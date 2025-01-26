@@ -42,5 +42,10 @@ namespace GGJ.MetaConstants
             HELD = 1
         }
 
+        public enum OxyStatonState
+        {
+            FULL = 0,
+            NEEDOXY = 1
+        }
     }
 }

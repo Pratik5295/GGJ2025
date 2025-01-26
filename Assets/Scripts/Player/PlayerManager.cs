@@ -55,8 +55,16 @@ namespace GGJ.Gameplay.Player
         {
             if(_interacted)
             {
-                //Player has initiated interaction, check the results
-                interactionSystem.HandlePlayerInteraction();
+                if (ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+                {
+                    //Player has initiated interaction, check the results
+                    interactionSystem.HandlePlayerInteraction();
+                }
+                else if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.INFO)
+                {
+                    //Showing info text, now hide it
+                    ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.GAME);
+                }
             }
             else
             {

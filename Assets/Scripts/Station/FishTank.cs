@@ -1,25 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using GGJ.Gameplay;
 using UnityEngine;
+using static GGJ.MetaConstants.EnumManager;
 
-public class FishTank : OxygenStation
+public class FishTank : MonoBehaviour
 {
-    public override void SubmitOxygenValve(OxygenTank _valve)
+    [Header("Valves References")]
+
+    [SerializeField]
+    private List<FishTankOxyStation> machineValves = new List<FishTankOxyStation>();
+
+    public int valveCount => machineValves.Count;
+
+    public bool IsBroken = false;
+
+
+    [SerializeField]
+    private Transform valvesHolder;
+
+
+    public bool AreAllValvesFull() => machineValves.All(valve => valve.OxygenStationState != OxyStatonState.NEEDOXY);
+
+
+    [ContextMenu("Find All Valves")]
+    public void FindValves()
     {
-        oxygenValve = _valve;
-
-        var go = oxygenValve.transform;
-
-        go.SetParent(valveStoreLoc, false);
-        go.localPosition = Vector3.zero;
-        go.localRotation = Quaternion.identity;
-        go.localScale = Vector3.one;
-
-        //Make it ready for using the said oxygen tank
-        SetOxygenTankForUse();
+        machineValves.Clear();
+        for (int i = 0; i < valvesHolder.childCount; i++)
+        {
+            var child = valvesHolder.GetChild(i);
+            machineValves.Add(child.GetComponent<FishTankOxyStation>());
+        }
     }
 
-    public void SetOxygenTankForUse()
+    private void Update()
     {
-        oxygenValve.StartToUse();
+        if (ScreenManager.Instance.ActiveKey != ScreenManager.ScreenKey.GAME) return;
+
+        if (!AreAllValvesFull())
+        {
+            IsBroken = true;
+        }
+        else
+        {
+            IsBroken = false;
+        }
     }
+
+
 }

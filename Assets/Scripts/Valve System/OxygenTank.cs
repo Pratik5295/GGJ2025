@@ -115,6 +115,8 @@ namespace GGJ.Gameplay
 
         private void Update()
         {
+            if (ScreenManager.Instance.ActiveKey != ScreenManager.ScreenKey.GAME) return;
+
             if (IsRecharging)
             {
                 //Currently being recharged
