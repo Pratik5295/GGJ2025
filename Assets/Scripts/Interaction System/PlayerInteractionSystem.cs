@@ -63,20 +63,42 @@ namespace GGJ.Gameplay.System
                         var heldCylinder = GetHeldOxygenCylinder();
                         if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
                         {
-                            //Check if the main machine is broken
-                            if (!IsMachineBroken(PlayerManager.Instance.CurrentOxygenStation))
+                            if (PlayerManager.Instance.CurrentOxygenStation.gameObject.GetComponent<FishTankOxyStation>())
                             {
-                                PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
-                                //Place the item
-                                currentInteractableObject.ResetInteract();
+                                if (heldCylinder.TankState == MetaConstants.EnumManager.OxyState.EMPTY)
+                                {
+                                    ToasterManager.Instance.PopulateToasterMessage("Oxygen cannister is empty");
+                                }
+                                else
+                                {
 
-                                currentInteractableObject = null;
+                                    PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
+
+                                    //Place the item
+                                    currentInteractableObject.ResetInteract();
+
+                                    currentInteractableObject = null;
+                                }
                             }
                             else
                             {
-                                Debug.Log("Machine is broken, cant add anything. Fix it");
-                                ToasterManager.Instance.PopulateToasterMessage("Supply machine is broken, unable to refill oxygen");
+
+                                //Check if the main machine is broken
+                                if (!IsMachineBroken(PlayerManager.Instance.CurrentOxygenStation))
+                                {
+                                    PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
+
+                                    //Place the item
+                                    currentInteractableObject.ResetInteract();
+
+                                    currentInteractableObject = null;
+                                }
+                                else
+                                {
+                                    Debug.Log("Machine is broken, cant add anything. Fix it");
+                                    ToasterManager.Instance.PopulateToasterMessage("Supply machine is broken, unable to refill oxygen");
+                                }
                             }
                         }
                         else

@@ -114,8 +114,8 @@ namespace StarterAssets
 
         private void OnApplicationFocus(bool hasFocus)
 		{
-			if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
-				SetCursorState(cursorLocked);
+			//if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+			//	SetCursorState(cursorLocked);
 		}
 
 		private void SetCursorState(bool newState)
