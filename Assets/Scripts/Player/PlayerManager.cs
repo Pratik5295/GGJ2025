@@ -1,5 +1,6 @@
 using GGJ.Gameplay.Interfaces;
 using GGJ.Gameplay.System;
+using StarterAssets;
 using UnityEngine;
 
 namespace GGJ.Gameplay.Player
@@ -36,20 +37,95 @@ namespace GGJ.Gameplay.Player
         [SerializeField]
         private PlayerInteractionSystem interactionSystem;
 
+        [HideInInspector]
+        public PlayerInteractionSystem InteractionSystem => interactionSystem;
+
         [SerializeField]
         private PlayerCollisionHandler collisionSystem;
 
         #endregion
 
+        #region Player Input Handling
+        [SerializeField]
+        private StarterAssetsInputs input;
+
+        public OxygenStation CurrentOxygenStation;
+
+        private void OnInteractEventHandle(bool _interacted)
+        {
+            if(_interacted)
+            {
+                if (ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+                {
+                    //Player has initiated interaction, check the results
+                    interactionSystem.HandlePlayerInteraction();
+                }
+                else if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.INFO)
+                {
+                    //Showing info text, now hide it
+                    ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.GAME);
+                }
+            }
+            else
+            {
+                //Button let go
+                interactionSystem.ResetInteraction();
+            }
+        }
+
+
+        #endregion
+
+
+        #region UNITY METHODS
+
+        private void Start()
+        {
+            if(input != null)
+            {
+                input.OnInteractEvent += OnInteractEventHandle;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (input != null)
+            {
+                input.OnInteractEvent -= OnInteractEventHandle;
+            }
+        }
+
+        #endregion
 
         public void SetCollidedTrigger(BaseTriggerArea _triggerArea)
         {
-            interactionSystem.SetInteractableObject(_triggerArea.Interactable);
+            interactionSystem.DetectInteractableObject(_triggerArea.Interactable);
         }
 
         public void ResetCollidedTrigger()
         {
-            interactionSystem.SetInteractableObject(null);
+            interactionSystem.DetectInteractableObject(null);
+        }
+
+        public BaseInteractable GetCurrentItem()
+        {
+            if (interactionSystem == null) return null;
+
+            var currentItem = interactionSystem.CurrentInteractableObject;
+
+            if (currentItem == null) return null;
+
+            if (currentItem.TryGetComponent<BasePickable>(out var heldItem))
+            {
+                return heldItem;
+            }
+
+            return null;
+        }
+
+        public void ForceCarryItem(BasePickable _pick)
+        {
+            interactionSystem.ForcePlayerPick(_pick);
         }
     }
 }

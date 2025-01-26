@@ -1,6 +1,7 @@
+using GGJ.Gameplay.Interfaces;
 using UnityEngine;
 
-namespace GGJ.Gameplay.Interfaces
+namespace GGJ.Gameplay
 {
     /// <summary>
     /// Base class for interactable object implementing Interactable interface
@@ -8,12 +9,25 @@ namespace GGJ.Gameplay.Interfaces
 
     public class BaseInteractable : MonoBehaviour, IInteractable
     {
+        [SerializeField]
+        private string MessageOnInteract;
+
         /// <summary>
         /// Allow player to interact with the object
         /// </summary>
-        public void Interact()
+        public virtual void Interact()
         {
-           
+           ScreenManager.Instance.PopulateInfoText(MessageOnInteract);
+           ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.INFO);    
+        }
+
+
+        /// <summary>
+        /// Reset the interact on this object
+        /// </summary>
+        public virtual void ResetInteract()
+        {
+
         }
     }
 }
