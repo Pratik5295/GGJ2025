@@ -15,7 +15,8 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interact;
-		public bool next;	//Button use for UI interactions
+		public bool next;   //Button use for UI interactions? Currently using interact
+		public bool pauseKey;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -26,6 +27,7 @@ namespace StarterAssets
 
 		public Action<bool> OnInteractEvent;
 		public Action<bool> OnNextEvent;
+		public Action<bool> OnPausedPressedEvent;
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
@@ -60,10 +62,15 @@ namespace StarterAssets
 		{
 			NextInput(value.isPressed);
 		}
+
+        public void OnPause(InputValue value)
+        {
+            PauseHandleInput(value.isPressed);
+        }
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -95,6 +102,12 @@ namespace StarterAssets
 		{
 			next = newNextState;
             OnNextEvent?.Invoke(next);
+
+        }
+        public void PauseHandleInput(bool newNextState)
+        {
+            pauseKey = newNextState;
+            OnPausedPressedEvent?.Invoke(pauseKey);
 
         }
 

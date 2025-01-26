@@ -67,12 +67,7 @@ public class ScreenManager : MonoBehaviour
     /// <param name="key">The key of the screen to display.</param>
     public void ShowScreen(ScreenKey key)
     {
-        if (key == ScreenKey.MENU)
-        {
-            Debug.LogWarning("ShowScreen was called with a None key.");
-            return;
-        }
-
+       
         if (_activeScreenKey == key)
         {
             Debug.Log("The requested screen is already active.");
