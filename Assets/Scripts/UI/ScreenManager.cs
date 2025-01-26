@@ -11,7 +11,9 @@ public class ScreenManager : MonoBehaviour
        MENU = 0,     //Will be turned to menu
        GAME = 1,
        PAUSE = 2,
-       INFO = 3
+       INFO = 3,
+       SETTINGS = 4,
+       CREDITS = 5
     }
 
     [System.Serializable]
@@ -65,12 +67,7 @@ public class ScreenManager : MonoBehaviour
     /// <param name="key">The key of the screen to display.</param>
     public void ShowScreen(ScreenKey key)
     {
-        if (key == ScreenKey.MENU)
-        {
-            Debug.LogWarning("ShowScreen was called with a None key.");
-            return;
-        }
-
+       
         if (_activeScreenKey == key)
         {
             Debug.Log("The requested screen is already active.");
@@ -150,6 +147,26 @@ public class ScreenManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        GameManager.Instance.RestartGame();
+    }
+
+    public void ShowSettings()
+    {
+        ShowScreen(ScreenKey.SETTINGS);
+    }
+
+    public void ShowCredits()
+    {
+        ShowScreen(ScreenKey.CREDITS);
+    }
+
+    public void ShowMenu()
+    {
+        ShowScreen(ScreenKey.MENU);
     }
 
     public void ShowInstructionText()

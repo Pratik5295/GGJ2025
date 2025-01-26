@@ -6,7 +6,7 @@ using static GGJ.MetaConstants.EnumManager;
 
 namespace GGJ.Gameplay
 {
-    public class GenericStation : MonoBehaviour
+    public class OxygenRefillingStation : MonoBehaviour
     {
         [SerializeField]
         private StationState state;
