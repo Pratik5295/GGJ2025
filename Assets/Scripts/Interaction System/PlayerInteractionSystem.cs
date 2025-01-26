@@ -62,7 +62,7 @@ namespace GGJ.Gameplay.System
                         var heldCylinder = GetHeldOxygenCylinder();
                         if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
                         {
-
+                            //Check if the main machine is broken
                             PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
                             //Place the item
