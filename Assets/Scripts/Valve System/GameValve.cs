@@ -32,8 +32,6 @@ namespace GGJ.Gameplay
 
         public override void Interact()
         {
-            base.Interact();
-
             Debug.Log($"{gameObject.name} is being interacted with");
 
             OnPlayerInteraction();

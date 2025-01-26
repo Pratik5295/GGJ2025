@@ -63,12 +63,19 @@ namespace GGJ.Gameplay.System
                         if (!PlayerManager.Instance.CurrentOxygenStation.HasCylinder)
                         {
                             //Check if the main machine is broken
-                            PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
+                            if (!IsMachineBroken(PlayerManager.Instance.CurrentOxygenStation))
+                            {
+                                PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
-                            //Place the item
-                            currentInteractableObject.ResetInteract();
+                                //Place the item
+                                currentInteractableObject.ResetInteract();
 
-                            currentInteractableObject = null;
+                                currentInteractableObject = null;
+                            }
+                            else
+                            {
+                                Debug.Log("Machine is broken, cant add anything. Fix it");
+                            }
                         }
                         else
                         {
@@ -207,6 +214,11 @@ namespace GGJ.Gameplay.System
             }
 
             currentInteractableObject = null;
+        }
+
+        private bool IsMachineBroken(OxygenStation _station)
+        {
+            return _station.IsMainMachineWorking;
         }
 
         
