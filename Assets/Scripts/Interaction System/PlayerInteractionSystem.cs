@@ -218,7 +218,7 @@ namespace GGJ.Gameplay.System
 
         private bool IsMachineBroken(OxygenStation _station)
         {
-            return _station.IsMainMachineWorking;
+            return !_station.IsMainMachineWorking;
         }
 
         
