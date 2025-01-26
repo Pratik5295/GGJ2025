@@ -65,12 +65,21 @@ namespace GGJ.Gameplay.System
                         {
                             if (PlayerManager.Instance.CurrentOxygenStation.gameObject.GetComponent<FishTankOxyStation>())
                             {
-                                PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
 
-                                //Place the item
-                                currentInteractableObject.ResetInteract();
+                                if (heldCylinder.TankState == MetaConstants.EnumManager.OxyState.EMPTY)
+                                {
+                                    ToasterManager.Instance.PopulateToasterMessage("Oxygen cannister is empty");
+                                }
+                                else
+                                {
 
-                                currentInteractableObject = null;
+                                    PlayerManager.Instance.CurrentOxygenStation.SubmitOxygenValve(heldCylinder);
+
+                                    //Place the item
+                                    currentInteractableObject.ResetInteract();
+
+                                    currentInteractableObject = null;
+                                }
                             }
                             else
                             {
