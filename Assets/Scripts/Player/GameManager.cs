@@ -1,3 +1,4 @@
+using GGJ.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,8 +32,8 @@ public class GameManager : MonoBehaviour
         IsGameOver = true;
 
         //Add the end state cinematic and scene restart here
-
-        RestartGame();
+        AudioManager.Instance.PlayForegroundSound(3);
+        Invoke("RestartGame",2f);
 
 
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GGJ.Gameplay;
+using GGJ.Managers;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
 
@@ -26,6 +27,8 @@ public class FishTankOxyStation : OxygenStation
         SetOxygenTankForUse();
 
         oxyStatonState = OxyStatonState.FULL;
+
+        AudioManager.Instance.PlayForegroundSound(1);
     }
 
     public void SetOxygenTankForUse()

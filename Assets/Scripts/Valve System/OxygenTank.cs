@@ -1,6 +1,8 @@
 
 using System;
 using GGJ.Gameplay.Player;
+using GGJ.Managers;
+using GGJ.Toaster;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
 
@@ -114,6 +116,9 @@ namespace GGJ.Gameplay
                 OxygenAmount = MaximumOxygenAmount;
                 Debug.Log("Tank recharge complete");
 
+                string message = "This is full. Bring it to the Master.";
+                ToasterManager.Instance.PopulateToasterMessage(message);
+
                 DetermineNextBreakAfter();
             }
         }
@@ -141,6 +146,8 @@ namespace GGJ.Gameplay
         public void StartRecharging()
         {
             SetState(OxyState.RECHARE);
+
+            AudioManager.Instance.PlayForegroundSound(2);
         }
 
         public void StartToUse()
@@ -163,7 +170,9 @@ namespace GGJ.Gameplay
                 rechargingTime = 0f;
                 timeCounter = 0f;
 
-                Debug.Log("Tank empty");
+
+                string message = "The Master is disturbed. It needs Oxygen.";
+                ToasterManager.Instance.PopulateToasterMessage(message);
             }
         }
 

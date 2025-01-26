@@ -54,6 +54,8 @@ namespace GGJ.Managers
                     foregroundAudioSources[i].volume = foregroundVolume;
                 }
             }
+
+            PlayBackgroundMusic(backgroundMusic);
         }
 
         // Play the background music with an option to stop it first

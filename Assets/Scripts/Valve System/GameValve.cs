@@ -1,4 +1,5 @@
 using System;
+using GGJ.Managers;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
 
@@ -61,6 +62,8 @@ namespace GGJ.Gameplay
             if (state == ValveState.BROKEN)
             {
                 isBroken = true;
+
+                AudioManager.Instance.PlayForegroundSound(4);
             }
 
             OnStateChangeEvent?.Invoke(this,state);
@@ -82,7 +85,7 @@ namespace GGJ.Gameplay
 
                     SetState(ValveState.REPAIR);
                     Debug.Log($"{gameObject.name} is being repaired");
-
+                    AudioManager.Instance.PlayForegroundSound(5);
                     break;
 
                 case ValveState.WORKING:
