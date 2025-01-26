@@ -1,6 +1,7 @@
 
 using System;
 using GGJ.Gameplay.Player;
+using GGJ.Managers;
 using GGJ.Toaster;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
@@ -145,6 +146,8 @@ namespace GGJ.Gameplay
         public void StartRecharging()
         {
             SetState(OxyState.RECHARE);
+
+            AudioManager.Instance.PlayForegroundSound(2);
         }
 
         public void StartToUse()
