@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GGJ.Toaster;
 using UnityEngine;
 using static GGJ.MetaConstants.EnumManager;
 
@@ -128,12 +129,18 @@ namespace GGJ.Gameplay
             if(!AreAllValvesWorking())
             {
                 SetState(StationState.BROKEN);
+
+                string message = "Something broke. Find the valve.";
+                ToasterManager.Instance.PopulateToasterMessage(message);
             }
             else
             {
                 //Machine is working 
                 SetState(StationState.WORKING);
                 IsBroken = false;
+
+                string message = "This is working now.";
+                ToasterManager.Instance.PopulateToasterMessage(message);
             }
         }
 
