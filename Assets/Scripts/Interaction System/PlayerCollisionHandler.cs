@@ -26,6 +26,11 @@ namespace GGJ.Gameplay.System
 
                     PlayerManager.Instance.SetCollidedTrigger(triggerObj);
                 }
+
+                if(PlayerManager.Instance.InteractionSystem.CurrentInteractableObject == null)
+                {
+                    ScreenManager.Instance.ShowInstructionText();
+                }
             }
             else
             {
@@ -35,7 +40,6 @@ namespace GGJ.Gameplay.System
 
         private void OnTriggerExit(Collider other)
         {
-            Debug.Log("Left trigger area");
             //Check if we are in interactable trigger area
             if (other.gameObject.TryGetComponent<BaseTriggerArea>(out var triggerObj))
             {
@@ -45,6 +49,8 @@ namespace GGJ.Gameplay.System
                 }
 
                 PlayerManager.Instance.ResetCollidedTrigger();
+                ScreenManager.Instance.HideInstructionText();
+
             }
         }
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScreenManager : MonoBehaviour
@@ -32,6 +33,14 @@ public class ScreenManager : MonoBehaviour
     public ScreenKey ActiveKey => _activeScreenKey;
 
     public GameObject ActiveScreen => _activeScreen;
+
+    [SerializeField]
+    private GameObject instructionText;
+
+
+    [Header("Info section")]
+    [SerializeField]
+    private ScreenInfoText infoObject;
 
     private void Awake()
     {
@@ -137,4 +146,29 @@ public class ScreenManager : MonoBehaviour
     {
         ShowScreen(ScreenKey.INFO);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ShowInstructionText()
+    {
+        instructionText.SetActive(true);
+    }
+
+    public void HideInstructionText()
+    {
+        instructionText.SetActive(false);
+    }
+
+
+    #region Info Handling
+
+    public void PopulateInfoText(string _text)
+    {
+        infoObject.PopulateInfoText(_text);
+    }
+
+    #endregion
 }

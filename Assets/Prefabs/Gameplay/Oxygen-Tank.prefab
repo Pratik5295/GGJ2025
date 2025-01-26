@@ -124,13 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b01a2f73173844185a2d32d5ea0b6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderComponent: {fileID: 0}
-  rb: {fileID: 0}
+  colliderComponent: {fileID: 7060715676342291570}
+  rb: {fileID: 5657998003500138374}
   pickState: 0
-  carryType: 1
+  Type: 1
   state: 0
   OxygenAmount: 0
-  Type: 1
   timeToEmpty: 0
   maxTime: 10
   rechargingTime: 0

@@ -37,6 +37,9 @@ namespace GGJ.Gameplay.Player
         [SerializeField]
         private PlayerInteractionSystem interactionSystem;
 
+        [HideInInspector]
+        public PlayerInteractionSystem InteractionSystem => interactionSystem;
+
         [SerializeField]
         private PlayerCollisionHandler collisionSystem;
 
