@@ -9,12 +9,16 @@ namespace GGJ.Gameplay
 
     public class BaseInteractable : MonoBehaviour, IInteractable
     {
+        [SerializeField]
+        private string MessageOnInteract;
+
         /// <summary>
         /// Allow player to interact with the object
         /// </summary>
         public virtual void Interact()
         {
-           
+           ScreenManager.Instance.PopulateInfoText(MessageOnInteract);
+           ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.INFO);    
         }
 
 

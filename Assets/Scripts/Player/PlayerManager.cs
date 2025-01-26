@@ -37,6 +37,9 @@ namespace GGJ.Gameplay.Player
         [SerializeField]
         private PlayerInteractionSystem interactionSystem;
 
+        [HideInInspector]
+        public PlayerInteractionSystem InteractionSystem => interactionSystem;
+
         [SerializeField]
         private PlayerCollisionHandler collisionSystem;
 
@@ -46,12 +49,22 @@ namespace GGJ.Gameplay.Player
         [SerializeField]
         private StarterAssetsInputs input;
 
+        public OxygenStation CurrentOxygenStation;
+
         private void OnInteractEventHandle(bool _interacted)
         {
             if(_interacted)
             {
-                //Player has initiated interaction, check the results
-                interactionSystem.HandlePlayerInteraction();
+                if (ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.GAME)
+                {
+                    //Player has initiated interaction, check the results
+                    interactionSystem.HandlePlayerInteraction();
+                }
+                else if(ScreenManager.Instance.ActiveKey == ScreenManager.ScreenKey.INFO)
+                {
+                    //Showing info text, now hide it
+                    ScreenManager.Instance.ShowScreen(ScreenManager.ScreenKey.GAME);
+                }
             }
             else
             {
@@ -92,6 +105,27 @@ namespace GGJ.Gameplay.Player
         public void ResetCollidedTrigger()
         {
             interactionSystem.DetectInteractableObject(null);
+        }
+
+        public BaseInteractable GetCurrentItem()
+        {
+            if (interactionSystem == null) return null;
+
+            var currentItem = interactionSystem.CurrentInteractableObject;
+
+            if (currentItem == null) return null;
+
+            if (currentItem.TryGetComponent<BasePickable>(out var heldItem))
+            {
+                return heldItem;
+            }
+
+            return null;
+        }
+
+        public void ForceCarryItem(BasePickable _pick)
+        {
+            interactionSystem.ForcePlayerPick(_pick);
         }
     }
 }
