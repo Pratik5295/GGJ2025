@@ -51,14 +51,14 @@ namespace GGJ.Gameplay {
 
         private void Update()
         {
-            if(MainMachine.State == MetaConstants.EnumManager.StationState.WORKING)
-            {
-                CanSupplyOxygen = true;
-            }
-            else
-            {
-                CanSupplyOxygen = false;
-            }
+            //if(MainMachine.State == MetaConstants.EnumManager.StationState.WORKING)
+            //{
+            //    CanSupplyOxygen = true;
+            //}
+            //else
+            //{
+            //    CanSupplyOxygen = false;
+            //}
         }
 
         //TO DO:

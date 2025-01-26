@@ -75,6 +75,8 @@ MonoBehaviour:
   isBroken: 0
   repairSessionTime: 0
   maxRepairTime: 3
+  handleAnim: {fileID: 2006909217096485809}
+  lightAnim: {fileID: 102845397306635737}
 --- !u!1001 &3230348205589697325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +134,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8b2392659140a14ca6acea1d5586a95, type: 3}
+--- !u!95 &102845397306635737 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3294912868213876468, guid: d8b2392659140a14ca6acea1d5586a95, type: 3}
+  m_PrefabInstance: {fileID: 3230348205589697325}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3339147692324383865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 181139805935107924, guid: d8b2392659140a14ca6acea1d5586a95, type: 3}

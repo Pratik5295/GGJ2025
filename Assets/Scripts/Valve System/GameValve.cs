@@ -70,6 +70,21 @@ namespace GGJ.Gameplay
                 AudioManager.Instance.PlayForegroundSound(4);
             }
 
+            //Animation play
+            switch(state)
+            {
+                case ValveState.BROKEN:
+                    handleAnim.SetTrigger("isNotUsing");
+                    lightAnim.SetTrigger("isBroken");
+                    break;
+
+                case ValveState.WORKING:
+
+                    handleAnim.SetTrigger("isUsing");
+                    lightAnim.SetTrigger("isWorking");
+                    break;
+            }
+
             OnStateChangeEvent?.Invoke(this,state);
         }
 
