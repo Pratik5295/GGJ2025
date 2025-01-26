@@ -74,14 +74,15 @@ namespace GGJ.Gameplay
             switch(state)
             {
                 case ValveState.BROKEN:
-                    handleAnim.SetTrigger("isNotUsing");
-                    lightAnim.SetTrigger("isBroken");
+                    Debug.Log("Pratik");
+                    handleAnim.SetBool("GoBreak", true);
+                    lightAnim.SetBool("GoBreak",true);
                     break;
 
                 case ValveState.WORKING:
 
-                    handleAnim.SetTrigger("isUsing");
-                    lightAnim.SetTrigger("isWorking");
+                    handleAnim.SetBool("GoBreak", false);
+                    lightAnim.SetBool("GoBreak", false);
                     break;
             }
 
